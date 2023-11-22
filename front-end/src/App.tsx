@@ -1,6 +1,18 @@
+import { useQuery } from 'react-query';
 import logo from './logo.svg';
+import axios from './axios';
 
 function App() {
+  /**
+   * Ejemplo de cómo use useQuery con la instancia de axios. Para correr
+   * el API ingresa a la carpeta de back-end a través de la terminal y usa "npm start"
+   */
+  const { data } = useQuery(['test'], () =>
+    axios.get('products').then(({ data }) => data.data)
+  );
+
+  console.log('products', data);
+
   return (
     <div className="h-screen flex justify-center items-center">
       <header className="w-fit flex flex-col items-center gap-3">
