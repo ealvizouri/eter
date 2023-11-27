@@ -3,7 +3,7 @@ CREATE TABLE `products` (
 	`created_at` text DEFAULT CURRENT_TIMESTAMP NOT NULL,
 	`active` integer DEFAULT 0 NOT NULL,
 	`name` text NOT NULL,
-	'image'
+	'image' text
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `products_id_unique` ON `products` (`id`);
