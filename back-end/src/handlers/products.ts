@@ -25,7 +25,6 @@ export const createProduct = async (req, res, next) => {
   });
 };
 
-	
 export const deleteProduct = async (req, res, next) =>{
 
 
@@ -39,3 +38,4 @@ export const deleteProduct = async (req, res, next) =>{
   });
   
   };
+	
