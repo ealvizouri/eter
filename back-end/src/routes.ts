@@ -5,7 +5,7 @@ export default (app: any) => {
   const products = Router();
   products.use('/products', [
     products.get('/', getAllProducts),
-    products.post('/', createProduct),
+    products.post('/', createProduct)
   ]);
   app.use('/v1', [products]);
 };
