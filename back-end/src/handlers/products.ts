@@ -14,7 +14,7 @@ export const createProduct = async (req, res, next) => {
   try{
 
 // Extraer archivo de imagen desde la solicitud
-const image = req.file;
+const image = req.body.image;
 
     // Almacena la imagen en el sistema de archivos (ajusta la ruta según tus necesidades)
     const imagePath = `uploads/${uuid()}_${image}`;
@@ -31,7 +31,7 @@ const image = req.file;
     
     })
     .returning({ id: Products.id, name: Products.name,created_at: Products.created_at,
-       quantity: Products.quantity/*,image: Products.image*/ });
+       quantity: Products.quantity,image: Products.image });
   res.json({
     data: newProduct,
   });
