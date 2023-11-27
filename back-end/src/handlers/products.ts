@@ -1,3 +1,4 @@
+import { eq } from 'drizzle-orm';
 import { db } from '../modules/drizzle';
 import uuid from '../modules/uuid';
 import { Products } from '../schema';
@@ -23,3 +24,18 @@ export const createProduct = async (req, res, next) => {
     data: newProduct,
   });
 };
+
+	
+export const deleteProduct = async (req, res, next) =>{
+
+
+  const id = req.body.id
+  //const name = req.body.name
+  const deleteProduct = await db.delete(Products)
+  .where(eq(Products.id, id));
+
+  res.json({
+    data: deleteProduct
+  });
+  
+  };
