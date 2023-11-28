@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { createProduct, getAllProducts,updateProduct } from './handlers/products';
-import { getAllUsers,createUser } from './handlers/users';
+import { getAllUsers,createUser,loginUser } from './handlers/users';
 
 
 export default (app: any) => {
@@ -8,6 +8,7 @@ export default (app: any) => {
   users.use('/usuarios',[
     users.get('/',getAllUsers),
     users.post('/',createUser),
+    users.post('/login', loginUser),
 
   ]);
 
