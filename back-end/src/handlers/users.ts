@@ -15,10 +15,6 @@ export const createUser = async (req, res, next) => {
           name: req.body.name,
           mail: req.body.mail,
           password: req.body.password
-
-
-    
-        
         })
         .returning({ id: Users.id, name: Users.name,mail: Users.mail, password: Users.password });
         res.json({
