@@ -4,6 +4,13 @@ import { Users } from '../schema';
 import uuid from '../modules/uuid';
 
 
+export const getAllUsers = async (req, res, next) => {
+    const allUsers = await db.select().from(Users);
+  
+    res.json({
+      data: allUsers,
+    });
+  };
 
 export const createUser = async (req, res, next) => {
     try{ 
