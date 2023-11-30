@@ -1,0 +1,61 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "login",
+    "dateExported": "2023-11-30T15:04:33.857Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7242e772-695e-4f83-b561-ed55a0d1648a",
+            "colId": "14686e6b-213a-433f-9c5b-db7ebd2d7482",
+            "containerId": "",
+            "name": "insertusuario",
+            "url": "localhost:5008/v1/usuarios",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-11-28T18:55:59.949Z",
+            "modified": "2023-11-28T19:07:02.105Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "\n{\n  \"id\" : 0,\n  \"name\" : \"chuy2\",\n  \"mail\": \"chuy@gmail.com\",\n  \"password\": \"Contrasegura1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "adbbcd0c-0e37-4be6-80ca-57c67d9020fe",
+            "colId": "14686e6b-213a-433f-9c5b-db7ebd2d7482",
+            "containerId": "",
+            "name": "getusuarios",
+            "url": "localhost:5008/v1/usuarios",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-11-28T19:17:28.476Z",
+            "modified": "2023-11-28T19:17:42.627Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "1c15466b-9bbf-4465-8e8d-123a18d347df",
+            "colId": "14686e6b-213a-433f-9c5b-db7ebd2d7482",
+            "containerId": "",
+            "name": "login",
+            "url": "localhost:5008/v1/usuarios/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-11-28T20:17:26.212Z",
+            "modified": "2023-11-28T20:53:46.031Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"mail\": \"chuy@gmail.com\",\n  \"password\": \"Contrasegura1\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
