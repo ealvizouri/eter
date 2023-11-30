@@ -43,6 +43,20 @@ const image = req.body.image;
  
 };
 
+export const deleteProduct = async (req, res, next) =>{
+
+
+  const id = req.body.id
+  //const name = req.body.name
+  const deleteProduct = await db.delete(Products)
+  .where(eq(Products.id, id));
+
+  res.json({
+    data: deleteProduct
+  });
+  
+  };
+	
 
   export const updateProduct = async (req, res, next) => {
     try{  

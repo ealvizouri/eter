@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createProduct, getAllProducts,updateProduct } from './handlers/products';
+import { createProduct, getAllProducts,updateProduct,deleteProduct } from './handlers/products';
 import { getAllUsers,createUser,loginUser } from './handlers/users';
 
 
@@ -14,6 +14,8 @@ export default (app: any) => {
 
   const products = Router();
   products.use('/products', [
+    
+    products.delete('/',deleteProduct),
     products.get('/', getAllProducts),
     products.post('/', createProduct),
     products.put('/',updateProduct)
