@@ -8,4 +8,5 @@ export const Products = sqliteTable('products', {
     .default(sql`CURRENT_TIMESTAMP`),
   quantity: integer('active').notNull().default(0),
   name: text('name').notNull(),
+  image: text('image')
 });

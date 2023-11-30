@@ -8,6 +8,13 @@
       "when": 1700623694227,
       "tag": "0000_demonic_texas_twister",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701116912708,
+      "tag": "0001_normal_steel_serpent",
+      "breakpoints": true
     }
   ]
 }
