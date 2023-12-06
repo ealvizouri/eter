@@ -7,12 +7,13 @@ import {Link} from 'react-router-dom'
 
 
 const Show = () => {
-    const { data, isError, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ['prods'],
         queryFn: () =>
             axios.get('products').then(({ data }) => data.data)
     }
     );
+    console.log('products', data);
     return (
         <div>
             <table>
@@ -26,15 +27,15 @@ const Show = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((products) => (
-                        <tr key={products.id}>
-                            <td>{products.id}</td>
-                            <td>{products.created_at}</td>
-                            <td>{products.quantity}</td>
-                            <td>{products.name}</td>
-                            <td>{products.image}</td>
+                    {data?.map((product) => (
+                        <tr key={product.id}>
+                            <td>{product.id}</td>
+                            <td>{product.created_at}</td>
+                            <td>{product.quantity}</td>
+                            <td>{product.name}</td>
+                            <td>{product.image}</td>
                             <td>
-                                <Link to={`/editproduct/${products.id}`}>
+                                <Link to={`/editproduct/${product.id}`}>
                                 Editar
                                 </Link>
                             </td>

@@ -13,10 +13,7 @@ const router = createBrowserRouter([
 
 
 function App() {
-  /**
-   * Ejemplo de cómo use useQuery con la instancia de axios. Para correr
-   * el API ingresa a la carpeta de back-end a través de la terminal y usa "npm start"
-   */
+
 
   return (
     <>
