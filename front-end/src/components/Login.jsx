@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
@@ -7,16 +8,17 @@ const Login = () => {
         mail: "",
         password: ""
     })
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Hacer la solicitud POST con Axios
+        // Hacer la solicitud POST
         axios.post("http://localhost:5008/v1/usuarios/login", values)
             .then(response => {
-                // Manejar la respuesta del servidor
-                console.log('Datos enviados', response.data); // Puedes hacer algo con los datos de respuesta si es necesario
+                // Respuesta del servidor
+                console.log('Datos enviados', response.data);
                 const userData = response.data; //Token que envia
-                history.push('/pagina-principal'); // Reemplaza '/pagina-principal' con la ruta real de tu página principal
+                navigate('/list');
 
             })
             .catch(error => {
@@ -40,13 +42,11 @@ const Login = () => {
                         <input type="password" name="password" className="form-control" placeholder="Ingresa tu contraseña"
                             onChange={e => setValues({ ...values, password: e.target.value })} />
                     </div>
-                    <button className="btn btn-success">Enviar</button>
+                    <button className="bg-black text-white p-2 rounded">Enviar</button>
                 </form>
             </div>
         </div>
     )
-
-
 
 
     /*
