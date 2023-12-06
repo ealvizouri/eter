@@ -1,13 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Show from "./components/Show";
+import Login from './components/Login';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Show />
+    element: <Login />
   },
   {
-    path: "/editproduct/:id",
-    //element: <Edit />
+    path: "/list",
+    element: <Show />
   }
 ])
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <>
     <div>
-    <h1 className="main-header">React CRUD Operations</h1>
+    <h1>React CRUD Operations</h1>
     <RouterProvider router={router}/>
     </div>
     </>
