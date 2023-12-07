@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Show from "./components/Show";
 import Login from './components/Login';
 import './index.css'
+import Create from './components/Create';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
   {
     path: "/list",
     element: <Show />
+  },
+  {
+    path: "/list/create",
+    element: <Create />
   }
 ])
 
@@ -20,7 +25,7 @@ function App() {
   return (
     <>
     <div>
-    <h1>React CRUD Operations</h1>
+    <h1 className='text-center'>React CRUD Operations</h1>
     <RouterProvider router={router}/>
     </div>
     </>

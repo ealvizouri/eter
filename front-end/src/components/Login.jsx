@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
-
+import '../index.css'
 
 const Login = () => {
     const [values, setValues] = useState({
@@ -28,21 +28,21 @@ const Login = () => {
     }
 
     return (
-        <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
-            <div className="w-50 border bg-white shadow px-5 pt-5 pb-5 rounded">
-                <h1>Inicio de Sesion</h1>
+        <div className='d-flex w-100 vh-100 justify-content-center align-items-center bg-light'>
+            <div className='w-50 border bg-white shadow px-5 pt-5 pb-5 rounded'>
+                <h1 className='text-center space-y-2 font-bold'>Inicio de Sesion</h1>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-2">
+                <div className='mb-2'>
                         <label htmlFor="mail">Correo:</label>
                         <input type="text" name="mail" className="form-control" placeholder="Ingresa tu correo"
                             onChange={e => setValues({ ...values, mail: e.target.value })} />
                     </div>
-                    <div className="mb-2">
+                    <div className='mb-2'>
                         <label htmlFor="password">Contraseña:</label>
                         <input type="password" name="password" className="form-control" placeholder="Ingresa tu contraseña"
                             onChange={e => setValues({ ...values, password: e.target.value })} />
                     </div>
-                    <button className="bg-black text-white p-2 rounded">Enviar</button>
+                    <button className="underline">Enviar</button>
                 </form>
             </div>
         </div>

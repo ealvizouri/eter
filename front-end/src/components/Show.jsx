@@ -1,5 +1,4 @@
 import React from "react"
-//import { getAll } from '../utilities/api'
 import { useQuery } from '@tanstack/react-query';
 import axios from '../axios';
 import {Link} from 'react-router-dom'
@@ -15,25 +14,25 @@ const Show = () => {
     );
     console.log('products', data);
     return (
-        <div>
-            <table>
+        <div className='grid grid-flow-row-dense'>
+            <table className='table-auto mt-3'>
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Fecha Creacion</th>
-                        <th>Quantity</th>
-                        <th>Nombre</th>
-                        <th>Imagen</th>
+                <tr className='bg-gradient-to-r from-purple-500 to-pink-500 text-white'>
+                        <th className='px-4 py-2'>ID</th>
+                        <th className='px-4 py-2'>Fecha Creacion</th>
+                        <th className='px-4 py-2'>Quantity</th>
+                        <th className='px-4 py-2'>Nombre</th>
+                        <th className='px-4 py-2'>Imagen</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data?.map((product) => (
                         <tr key={product.id}>
-                            <td>{product.id}</td>
-                            <td>{product.created_at}</td>
-                            <td>{product.quantity}</td>
-                            <td>{product.name}</td>
-                            <td>{product.image}</td>
+                            <td className='border px-4 py-2'>{product.id}</td>
+                            <td className='border px-4 py-2'>{product.created_at}</td>
+                            <td className='border px-4 py-2'>{product.quantity}</td>
+                            <td className='border px-4 py-2'>{product.name}</td>
+                            <td className='border px-4 py-2'>{product.image}</td>
                             <td>
                                 <Link to={`/editproduct/${product.id}`}>
                                 Editar
@@ -43,7 +42,7 @@ const Show = () => {
                     ))}
                 </tbody>
             </table>
-            <Link to={`/create`}> Crear </Link>
+            <Link to={`/list/create`}> Crear </Link>
         </div>
     )
 }
