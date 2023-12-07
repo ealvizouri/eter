@@ -10,8 +10,7 @@ const Login = () => {
     })
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = ({email, password}:any) => {
         // Hacer la solicitud POST
         axios.post("http://localhost:5008/v1/usuarios/login", values)
             .then(response => {
@@ -30,7 +29,7 @@ const Login = () => {
     return (
         <div className='d-flex w-100 vh-100 justify-content-center align-items-center bg-light'>
             <div className='w-50 border bg-white shadow px-5 pt-5 pb-5 rounded'>
-                <h1 className='text-center space-y-2 font-bold'>Inicio de Sesion</h1>
+                <h1 className='text-center font-bold text-red-500'>Inicio de Sesion</h1>
                 <form onSubmit={handleSubmit}>
                 <div className='mb-2'>
                         <label htmlFor="mail">Correo:</label>

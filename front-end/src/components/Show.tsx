@@ -26,7 +26,7 @@ const Show = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.map((product) => (
+                    {data?.map((product: any) => (
                         <tr key={product.id}>
                             <td className='border px-4 py-2'>{product.id}</td>
                             <td className='border px-4 py-2'>{product.created_at}</td>

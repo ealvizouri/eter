@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="text-center">React CRUD Operations</h1>
+        <h1 className="text-center text-red-500">React CRUD Operations</h1>
         <RouterProvider router={router} />
       </div>
     </>
