@@ -6,14 +6,14 @@ import Input from './Input';
 import { User } from '../entities';
 
 interface FormValues {
-  email: string;
+    mail: string;
   password: string;
 }
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormValues>({
     values: {
-      email: '',
+      mail: '',
       password: '',
     },
   });
@@ -46,47 +46,17 @@ const Login = () => {
               required: 'Campo requerido',
             }}
             control={control}
-            name="email"
+            name="mail"
             label="Correo"
           />
           <Input control={control} name="password" label="Contraseña" />
-          <button className="underline" type="submit">
+          <button className="btn" type="submit">
             Enviar
           </button>
         </Form>
       </div>
     </div>
   );
-
-  /*
-        const [post, setPost] = useState({
-            nombre: "",
-            correo: ""
-        });
-    
-        console.log(post)
-    
-        const handleChangeInput = (e) => {
-            setPost({
-                ...post,
-                [e.target.name]: e.target.value
-            })
-        }
-    
-        const renderField = (label) => (
-            <div>
-                <label>{label}</label>
-                <input onChange={handleChangeInput} type="text" name={label.toLowerCase()} value={post[label.toLowerCase()]} />
-            </div>
-        )
-    
-        return (
-            <form>
-                {renderField('Nombre')}
-                {renderField('Correo')}
-                <button type="submit">Enviar</button>
-            </form>
-        )*/
 };
 
 export default Login;
