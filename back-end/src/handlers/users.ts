@@ -3,6 +3,8 @@ import { db } from '../modules/drizzle';
 import { Users } from '../schema';
 import uuid from '../modules/uuid';
 import { hashPassword,comparePasswords } from '../modules/encrypt';
+import { generarToken } from '../modules/auth';
+
 
 
 export const getAllUsers = async (req, res, next) => {
@@ -43,34 +45,39 @@ export const singUp = async (req, res, next) => {
     
     export const loginUser = async (req, res, next) => {
       try {
-
-       const mail = req.body.mail
-       const password = req.body.password 
-       
-
-        const [user] = await db.select({mail: Users.mail, password: Users.password})
-
-        .from(Users).where(eq(Users.mail, mail));
+        const mail = req.body.mail;
+        const password = req.body.password;
     
-        if ( !user) {
-            return res.status(401).json({ error: 'Correo incorrecto' });
-          }
-     // Comparar la contraseña ingresada con el hash almacenado en la base de datos
-            const passwordMatch = await comparePasswords(password, user[0].password);
-      
-            if (passwordMatch) {
-              // Si la comparación es exitosa, puedes generar un token y enviarlo como respuesta
-              const token = mail + passwordMatch + 'tokenprovisional';
-             return res.json({ token });
-            }           
-              return res.status(401).json({ error: 'Contraseña incorrecta' });
-
+        const [user] = await db
+          .select({id: Users.id, mail: Users.mail, password: Users.password }) 
+          .from(Users)
+          .where(eq(Users.mail, mail));
+    
+        if (!user) {
+          console.log('Usuario no encontrado para el correo:', mail);
+          return res.status(401).json({ error: 'Correo incorrecto' });
+        }
+    
+        // Comparar la contraseña ingresada con el hash almacenado en la base de datos
+        const passwordMatch = await comparePasswords(password, user.password);
+    
+        if (passwordMatch) {
+          //const token = mail + passwordMatch + 'tokenprovisional';
+          const token = generarToken(user.id); // Comentado porque no está definido en tu código
+    
+          console.log('Inicio de sesión exitoso para el correo:', mail);
+          return res.json({ token });
+        }
+    
+        console.log('Contraseña incorrecta para el correo:', mail);
+        return res.status(401).json({ error: 'Contraseña incorrecta' });
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
       }
     };
+    
 
  
 
-    
+  
