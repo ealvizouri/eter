@@ -3,6 +3,8 @@ import { createProduct, getAllProducts,updateProduct,deleteProduct } from './han
 import { getAllUsers,singUp,loginUser } from './handlers/users';
 import path from 'path';
 import uuid from './modules/uuid';
+import { auth } from './modules/auth'; 
+
 
 
 const multer = require('multer')
@@ -37,7 +39,7 @@ export default (app: any) => {
     
     products.delete('/',deleteProduct),
     products.get('/', getAllProducts),
-    products.post('/',upload.single('img'), createProduct),
+    products.post('/',auth,upload.single('img'), createProduct),
     products.put('/',upload.single('img'),updateProduct)
   ]);
 
