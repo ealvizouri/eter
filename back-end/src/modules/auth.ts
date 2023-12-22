@@ -27,8 +27,7 @@ export const generarToken = (usuarioId: string): string => {
     }
   
     try {
-      // Verificar el token
-      const decoded = jwt.verify(token, 'tu_clave_secreta'); // Reemplaza con tu clave secreta
+      const decoded = jwt.verify(token, 'ETER'); 
   
       next();
     } catch (error) {

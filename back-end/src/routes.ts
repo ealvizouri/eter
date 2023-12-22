@@ -37,8 +37,8 @@ export default (app: any) => {
   const products = Router();
   products.use('/products', [
     
-    products.delete('/',deleteProduct),
-    products.get('/', getAllProducts),
+    products.delete('/',auth,deleteProduct),
+    products.get('/',auth,getAllProducts),
     products.post('/',auth,upload.single('img'), createProduct),
     products.put('/',upload.single('img'),updateProduct)
   ]);
