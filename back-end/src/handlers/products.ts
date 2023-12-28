@@ -60,8 +60,6 @@ export const deleteProduct = async (req, res, next) =>{
 
   export const updateProduct = async (req, res, next) => {
     try{  
-
-
 // Extraer archivo de imagen desde la solicitud
 const image = req.body.image;
 
