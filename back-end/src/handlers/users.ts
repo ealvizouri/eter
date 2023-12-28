@@ -48,26 +48,23 @@ export const singUp = async (req, res, next) => {
        const password = req.body.password 
        
 
-        const user = await db.select({mail: Users.mail, password: Users.password})
+        const [user] = await db.select({mail: Users.mail, password: Users.password})
 
         .from(Users).where(eq(Users.mail, mail));
     
-        if (user.length === 0 || user[0].mail !== mail) {
+        if ( !user) {
             return res.status(401).json({ error: 'Correo incorrecto' });
-          }else {
-            // Comparar la contraseña ingresada con el hash almacenado en la base de datos
+          }
+     // Comparar la contraseña ingresada con el hash almacenado en la base de datos
             const passwordMatch = await comparePasswords(password, user[0].password);
       
             if (passwordMatch) {
               // Si la comparación es exitosa, puedes generar un token y enviarlo como respuesta
               const token = mail + passwordMatch + 'tokenprovisional';
-              res.json({ token });
-            } else {
-              // Si la comparación falla, la contraseña es incorrecta
+             return res.json({ token });
+            }           
               return res.status(401).json({ error: 'Contraseña incorrecta' });
-            }
-          }
-    
+
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
