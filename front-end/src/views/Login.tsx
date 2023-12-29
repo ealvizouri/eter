@@ -3,10 +3,11 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import '../index.css';
 import Input from '../components/Input';
+import Button from '../components/Button';
 import { User } from '../entities';
 
 interface FormValues {
-    mail: string;
+  mail: string;
   password: string;
 }
 
@@ -37,25 +38,41 @@ const Login = () => {
   };
 
   return (
-    <div className="d-flex w-100 vh-100 justify-content-center align-items-center bg-light">
-      <div className="w-50 border bg-white shadow px-5 pt-5 pb-5 rounded">
-        <h1 className="text-center font-bold text-red-500">Inicio de Sesion</h1>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            rules={{
-              required: 'Campo requerido',
-            }}
-            control={control}
-            name="mail"
-            label="Correo"
-          />
-          <Input control={control} name="password" label="Contraseña" type="password"/>
-          <button className="btn" type="submit">
-            Enviar
-          </button>
-        </Form>
+<div className="flex items-center justify-center h-screen bg-light">
+  <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
+    <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <div className="mb-4">
+        <Input
+          rules={{
+            required: 'Campo requerido',
+          }}
+          control={control}
+          name="mail"
+          label="Correo"
+        />
       </div>
-    </div>
+      <div className="mb-6">
+        <Input
+          control={control}
+          name="password"
+          label="Contraseña"
+          type="password"
+        />
+      </div>
+      <Button
+        border="2px solid #4CAF50"
+        color="#4CAF50"
+        height="40px"
+        onClick={() => console.log("Enviar")}
+        radius="5px"
+        width="100%"
+      >
+        Enviar
+      </Button>
+    </Form>
+  </div>
+</div>
   );
 };
 
