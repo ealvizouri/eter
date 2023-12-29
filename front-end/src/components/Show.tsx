@@ -13,7 +13,7 @@ const Show = () => {
     <div className="grid grid-flow-row-dense">
       <table className="table-auto mt-3">
         <thead>
-          <tr className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+          <tr className="bg-gradient-to-r from-purple-500 to-pink-500 text-black">
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2">Fecha Creacion</th>
             <th className="px-4 py-2">Quantity</th>
