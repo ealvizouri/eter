@@ -1,7 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../axios';
-import { Link } from 'react-router-dom';
+import Link from '../components/Links';
+
 
 const Show = () => {
   const { data } = useQuery({
@@ -36,7 +37,9 @@ const Show = () => {
           ))}
         </tbody>
       </table>
-      <Link to={`/list/create`}> Crear </Link>
+      <Link to={`/list/create`} className="font-bold">
+        Crear
+      </Link>
     </div>
   );
 };

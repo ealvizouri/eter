@@ -45,7 +45,7 @@ const Login = () => {
           <div className="mb-4">
             <Input
               rules={{
-                required: 'Ingrese su correo',
+                required: 'Campo requerido',
               }}
               control={control}
               name="mail"
@@ -55,7 +55,7 @@ const Login = () => {
           <div className="mb-4">
             <Input
             rules={{
-              required: 'Ingrese su contraseña',
+              required: 'Campo requerido',
             }}
               control={control}
               name="password"
@@ -71,6 +71,7 @@ const Login = () => {
               onClick={() => console.log("Ingresando...")}
               radius="5px"
               width="100%"
+              className='text-white'
             >
               Enviar
             </Button>
