@@ -49,7 +49,7 @@ const Login = () => {
             name="mail"
             label="Correo"
           />
-          <Input control={control} name="password" label="Contraseña" />
+          <Input control={control} name="password" label="Contraseña" type="password"/>
           <button className="btn" type="submit">
             Enviar
           </button>
