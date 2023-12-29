@@ -1,4 +1,4 @@
-import { Controller } from 'react-hook-form';
+import { Control, FieldValues, Controller } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
 interface Props {
@@ -25,14 +25,15 @@ const Input = ({
       rules={rules}
       render={({ field, fieldState: { error } }) => {
         return (
-          <div>
+          <div className="flex flex-col mb-4"> {/* Contenedor flex para colocar elementos en columna */}
             <label>{label}</label>
             <input
               {...field}
               type={type}
+              placeholder={label}
               className={twMerge(
-                '', // custom styling
-                error?.message ? 'border border-red-500' : '',
+                'border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300', // custom styling
+                error?.message ? 'border border-red-500' : 'border-gray-300',
                 className
               )}
             />

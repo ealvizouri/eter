@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from './axios';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Show from './components/Show';
-import Login from './components/Login';
+import Show from './views/Show';
+import Login from './views/Login';
 import './index.css';
-import Create from './components/Create';
+import Create from './views/Create';
 
 const router = createBrowserRouter([
   {
