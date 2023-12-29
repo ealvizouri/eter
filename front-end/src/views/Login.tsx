@@ -71,7 +71,7 @@ const Login = () => {
               onClick={() => console.log("Ingresando...")}
               radius="5px"
               width="100%"
-              className='text-white'
+              className='text-white bg-green-500 rounded-md'
             >
               Enviar
             </Button>
