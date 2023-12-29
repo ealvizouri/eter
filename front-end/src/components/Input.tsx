@@ -25,7 +25,7 @@ const Input = ({
       rules={rules}
       render={({ field, fieldState: { error } }) => {
         return (
-          <div>
+          <div className="flex flex-col mb-4"> {/* Contenedor flex para colocar elementos en columna */}
             <label>{label}</label>
             <input
               {...field}

@@ -38,41 +38,47 @@ const Login = () => {
   };
 
   return (
-<div className="flex items-center justify-center h-screen bg-light">
-  <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
-    <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-4">
-        <Input
-          rules={{
-            required: 'Campo requerido',
-          }}
-          control={control}
-          name="mail"
-          label="Correo"
-        />
+    <div className="flex items-center justify-center h-screen bg-light">
+      <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
+        <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <div className="mb-4">
+            <Input
+              rules={{
+                required: 'Ingrese su correo',
+              }}
+              control={control}
+              name="mail"
+              label="Correo"
+            />
+          </div>
+          <div className="mb-4">
+            <Input
+            rules={{
+              required: 'Ingrese su contraseña',
+            }}
+              control={control}
+              name="password"
+              label="Contraseña"
+              type="password"
+            />
+          </div>
+          <div className="mb-6">
+            <Button
+              border="2px solid #4CAF50"
+              color="#4CAF50"
+              height="40px"
+              onClick={() => console.log("Ingresando...")}
+              radius="5px"
+              width="100%"
+            >
+              Enviar
+            </Button>
+          </div>
+        </Form>
       </div>
-      <div className="mb-6">
-        <Input
-          control={control}
-          name="password"
-          label="Contraseña"
-          type="password"
-        />
-      </div>
-      <Button
-        border="2px solid #4CAF50"
-        color="#4CAF50"
-        height="40px"
-        onClick={() => console.log("Enviar")}
-        radius="5px"
-        width="100%"
-      >
-        Enviar
-      </Button>
-    </Form>
-  </div>
-</div>
+    </div>
+
   );
 };
 
