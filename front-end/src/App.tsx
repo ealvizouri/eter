@@ -1,8 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from './axios';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Show from './components/Show';
 import Login from './components/Login';
 import './index.css';
 import Create from './components/Create';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,6 +22,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  /**
+   * Ejemplo de cómo use useQuery con la instancia de axios. Para correr
+   * el API ingresa a la carpeta de back-end a través de la terminal y usa "npm start"
+   */
+  const { data } = useQuery({
+    queryKey: ['test'],
+    queryFn: () => axios.get('products').then(({ data }) => data.data),
+  });
+
+  console.log('products', data);
+
   return (
     <>
       <div>
