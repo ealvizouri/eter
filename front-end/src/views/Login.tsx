@@ -2,7 +2,7 @@ import { Form, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import '../index.css';
-import Input from './Input';
+import Input from '../components/Input';
 import { User } from '../entities';
 
 interface FormValues {
