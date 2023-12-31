@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -6,6 +7,8 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import { User } from '../entities';
 
+// ... (importaciones)
+
 interface FormValues {
   mail: string;
   password: string;
@@ -13,11 +16,13 @@ interface FormValues {
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormValues>({
-    values: {
+    defaultValues: {
       mail: '',
       password: '',
     },
   });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,7 +33,7 @@ const Login = () => {
       .then((response) => {
         // Respuesta del servidor
         console.log('Datos enviados', response.data);
-        const userData = response.data; //Token que envia
+        const userData = response.data; // Token que envía
         navigate('/list');
       })
       .catch((error) => {
@@ -54,14 +59,22 @@ const Login = () => {
           </div>
           <div className="mb-4">
             <Input
-            rules={{
-              required: 'Campo requerido',
-            }}
+              rules={{
+                required: 'Campo requerido',
+              }}
               control={control}
               name="password"
               label="Contraseña"
-              type="password"
-            />
+              type={showPassword ? 'text' : 'password'}
+            >
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="text-justify text-gray-400 cursor-pointer focus:outline-none"
+              >
+                {showPassword ? 'Ocultar' : 'Mostrar'}
+              </button>
+            </Input>
           </div>
           <div className="mb-6">
             <Button
@@ -79,7 +92,6 @@ const Login = () => {
         </Form>
       </div>
     </div>
-
   );
 };
 

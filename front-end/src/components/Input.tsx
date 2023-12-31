@@ -1,5 +1,6 @@
 import { Control, FieldValues, Controller } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
+import React from 'react';
 
 interface Props {
   name: string;
@@ -8,6 +9,7 @@ interface Props {
   className?: string;
   control: any;
   rules?: any;
+  children?: React.ReactNode; // Nueva propiedad children
 }
 
 const Input = ({
@@ -17,6 +19,7 @@ const Input = ({
   className,
   control,
   rules = {},
+  children, // Agrega la propiedad children
 }: Props) => {
   return (
     <Controller
@@ -25,7 +28,7 @@ const Input = ({
       rules={rules}
       render={({ field, fieldState: { error } }) => {
         return (
-          <div className="flex flex-col mb-4"> {/* Contenedor flex para colocar elementos en columna */}
+          <div className="flex flex-col mb-4 relative"> {/* Contenedor flex para colocar elementos en columna */}
             <label>{label}</label>
             <input
               {...field}
@@ -37,6 +40,11 @@ const Input = ({
                 className
               )}
             />
+            {children && (
+              <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
+                {children}
+              </div>
+            )}
             {error?.message && (
               <label className="text-red-500">{error.message}</label>
             )}
