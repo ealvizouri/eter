@@ -1,47 +1,17 @@
-import { createContext, useContext, useState } from 'react';
-import { Form, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom'; // Importa useNavigate desde react-router-dom
 import axios from 'axios';
 import '../index.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { User } from '../entities';
+import { useAuth } from '../AuthProvider';
 
 interface FormValues {
   mail: string;
   password: string;
 }
-
-interface AuthContextProps {
-  token: string | null;
-  setToken: (token: string | null) => void;
-}
-
-interface AuthProviderProps {
-  children: React.ReactNode;
-}
-
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
-
-const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(null);
-
-  return (
-    <AuthContext.Provider value={{ token, setToken }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
-
-const useAuth = () => {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth debe ser utilizado dentro de un AuthProvider');
-  }
-
-  return context;
-};
 
 const Login = () => {
   const { control, handleSubmit } = useForm<FormValues>({
@@ -51,39 +21,30 @@ const Login = () => {
     },
   });
 
-  const { setToken } = useAuth(); // Obtener la función setToken del contexto
-
+  const { setToken } = useAuth();
+  const navigate = useNavigate(); // Utiliza useNavigate desde react-router-dom
   const [showPassword, setShowPassword] = useState(false);
-
-  const navigate = useNavigate();
 
   const onSubmit = async (values: FormValues) => {
     try {
-      // Hacer la solicitud POST
       const response = await axios.post<User>('http://localhost:5008/v1/usuarios/login', values);
-      const token = response.data.token; // Acceder al token
+      const token = response.data.token;
       console.log('Token:', token);
 
-      // Almacenar el token en el estado global
       setToken(token);
-
-      // Incluir el token en el encabezado de autorización para futuras solicitudes
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      // Redirigir a la página de listado de productos
       navigate('/list');
     } catch (error) {
-      // Manejar errores
       console.error('Error al hacer la solicitud POST:', error);
     }
   };
-
 
   return (
     <div className="flex items-center justify-center h-screen bg-light bg-slate-700">
       <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
         <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <Input
               rules={{
@@ -118,7 +79,7 @@ const Login = () => {
               border="2px solid #4CAF50"
               color="#4CAF50"
               height="40px"
-              onClick={() => console.log("Ingresando...")}
+              onClick={handleSubmit(onSubmit)} // Utiliza handleSubmit directamente
               radius="5px"
               width="100%"
               className='text-white bg-green-500 rounded-md'
@@ -126,11 +87,10 @@ const Login = () => {
               Enviar
             </Button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   );
 };
 
 export default Login;
-
