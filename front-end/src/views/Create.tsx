@@ -1,8 +1,14 @@
 // Create.tsx
 import React from "react";
 import { Link } from "react-router-dom";
+import Formulario from "../components/Form";
 
 const Create = () => {
+  const onSubmit = (data: any) => {
+    // Aquí puedes manejar la lógica de envío del formulario
+    console.log(data);
+  };
+
   return (
     <div className="p-4">
       <Link
@@ -12,7 +18,10 @@ const Create = () => {
         Regresar al Listado
       </Link>
 
-      {/* Resto del contenido de tu formulario o componente Create */}
+      <div className="mt-4">
+        <h2 className="text-2xl font-bold mb-4">Crear Producto</h2>
+        <Formulario onSubmit={onSubmit} />
+      </div>
     </div>
   );
 };
