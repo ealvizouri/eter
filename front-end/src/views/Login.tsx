@@ -43,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-light">
+    <div className="flex items-center justify-center h-screen bg-light bg-slate-700">
       <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
         <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -96,3 +96,4 @@ const Login = () => {
 };
 
 export default Login;
+
