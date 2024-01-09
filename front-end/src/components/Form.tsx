@@ -27,7 +27,7 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit }) => {
           Fecha de Creación
         </label>
         <input
-          type="text" // Puedes cambiarlo a "date" si prefieres un campo de fecha
+          type="date"
           id="creationDate"
           {...register('creationDate', { required: 'Este campo es obligatorio' })}
           className={`border p-2 rounded-md w-full ${errors.creationDate ? 'border-red-500' : 'border-gray-300'}`}
