@@ -5,6 +5,7 @@ import Show from './views/Show';
 import Login from './views/Login';
 import './index.css';
 import Create from './views/Create';
+import Edit from './views/Edit';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: '/list/create',
     element: <Create />,
+  },
+  {
+    path: '/list/edit/:id',
+    element: <Edit />,
   },
 ]);
 

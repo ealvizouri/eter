@@ -5,7 +5,7 @@ import Formulario from "../components/Form";
 
 const Create = () => {
   const onSubmit = (data: any) => {
-    // Aquí puedes manejar la lógica de envío del formulario
+    // Aquí se maneja la lógica de envío del formulario
     console.log(data);
   };
 

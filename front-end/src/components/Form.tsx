@@ -11,14 +11,16 @@ interface FormData {
 
 interface FormularioProps {
     onSubmit: SubmitHandler<FormData>;
+    initialValues?: FormData; // Prop opcional para valores iniciales en modo edición
+    modo?: string; // Agregar la prop 'modo'
 }
 
-const Formulario: React.FC<FormularioProps> = ({ onSubmit }) => {
+const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<FormData>();
+    } = useForm<FormData>({ defaultValues: initialValues });
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto p-4 bg-white shadow-lg rounded-md">
