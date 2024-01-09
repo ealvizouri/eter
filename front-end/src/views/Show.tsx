@@ -9,7 +9,7 @@ interface ShowProps {
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { token } = useAuth(); // Obtén el token del contexto
+  const { token } = useAuth(); //Aqui se obtiene el token
 
   console.log('Token en Show:', token);
   const { data, isLoading, isError } = useQuery({
@@ -25,13 +25,20 @@ const Show: React.FC<ShowProps> = () => {
   });
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-2xl font-semibold text-gray-600">Cargando productos...</p>
+      </div>
+    );
   }
 
   if (isError) {
-    return <p>Error al cargar los productos</p>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-2xl font-semibold text-red-500">Error al cargar los productos</p>
+      </div>
+    );
   }
-
   console.log('products', data);
   return (
     <div className="overflow-x-auto p-4">
