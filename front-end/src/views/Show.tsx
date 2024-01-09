@@ -3,14 +3,22 @@ import { useQuery } from '@tanstack/react-query';
 import axios from '../axios';
 import Link from '../components/Links';
 import { useAuth } from '../AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface ShowProps {
   token: string | null;
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { token } = useAuth(); //Aqui se obtiene el token
+  const { token, setToken } = useAuth(); // Incluye setToken para limpiar el token
+  const navigate = useNavigate(); // Incluye useNavigate para redirigir
 
+  const handleLogout = () => {
+    setToken(null);
+
+    // Redirige al componente de inicio de sesión después de cerrar sesión
+    navigate('/');
+  };
   console.log('Token en Show:', token);
   const { data, isLoading, isError } = useQuery({
     queryKey: ['prods'],
@@ -42,6 +50,13 @@ const Show: React.FC<ShowProps> = () => {
   console.log('products', data);
   return (
     <div className="overflow-x-auto p-4">
+      {/* Botón para cerrar sesión */}
+      <button
+        className="bg-red-500 text-white px-4 py-2 rounded"
+        onClick={handleLogout}
+      >
+        Cerrar Sesión
+      </button>
       <table className="min-w-full table-auto mt-3 bg-white border rounded">
         <thead>
           <tr className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
