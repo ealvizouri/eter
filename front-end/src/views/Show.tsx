@@ -13,11 +13,11 @@ const Show = () => {
   
   return (
     <div className="overflow-x-auto p-4">
-      <table className="min-w-full table-auto mt-3 bg-white border rounded">
+      <table className="min-w-full table-auto mt-3 bg-white border rounded hover:">
         <thead>
           <tr className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
             <th className="px-4 py-2">ID</th>
-            <th className="px-4 py-2">Fecha Creación (Hora y fecha)</th>
+            <th className="px-4 py-2">Fecha y Hora De Creación</th>
             <th className="px-4 py-2">Cantidad</th>
             <th className="px-4 py-2">Nombre</th>
             <th className="px-4 py-2">Imagen</th>
