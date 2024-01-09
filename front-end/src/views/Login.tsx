@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { Form, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -12,6 +12,37 @@ interface FormValues {
   password: string;
 }
 
+interface AuthContextProps {
+  token: string | null;
+  setToken: (token: string | null) => void;
+}
+
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [token, setToken] = useState<string | null>(null);
+
+  return (
+    <AuthContext.Provider value={{ token, setToken }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const useAuth = () => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth debe ser utilizado dentro de un AuthProvider');
+  }
+
+  return context;
+};
+
 const Login = () => {
   const { control, handleSubmit } = useForm<FormValues>({
     defaultValues: {
@@ -20,30 +51,31 @@ const Login = () => {
     },
   });
 
+  const { setToken } = useAuth(); // Obtener la función setToken del contexto
+
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
-  const onSubmit = (values: FormValues) => {
-    // Hacer la solicitud POST
-    axios
-      .post<User>('http://localhost:5008/v1/usuarios/login', values)
-      .then((response) => {
-        // Respuesta del servidor
-        console.log('Datos enviados', response.data);
-        const token = response.data.token; // Acceder al token
-        console.log('Token:', token);
-  
-        // Incluir el token en el encabezado de autorización para futuras solicitudes
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  
-        // Redirigir a la página de listado de productos
-        navigate('/list');
-      })
-      .catch((error) => {
-        // Manejar errores
-        console.error('Error al hacer la solicitud POST:', error);
-      });
+  const onSubmit = async (values: FormValues) => {
+    try {
+      // Hacer la solicitud POST
+      const response = await axios.post<User>('http://localhost:5008/v1/usuarios/login', values);
+      const token = response.data.token; // Acceder al token
+      console.log('Token:', token);
+
+      // Almacenar el token en el estado global
+      setToken(token);
+
+      // Incluir el token en el encabezado de autorización para futuras solicitudes
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      // Redirigir a la página de listado de productos
+      navigate('/list');
+    } catch (error) {
+      // Manejar errores
+      console.error('Error al hacer la solicitud POST:', error);
+    }
   };
 
 

@@ -3,14 +3,32 @@ import { useQuery } from '@tanstack/react-query';
 import axios from '../axios';
 import Link from '../components/Links';
 
-const Show = () => {
-  const { data } = useQuery({
+interface ShowProps {
+  token?: string | null;
+}
+
+const Show: React.FC<ShowProps> = ({ token }) => {
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['prods'],
-    queryFn: () => axios.get('products').then(({ data }) => data.data),
+    queryFn: () =>
+      axios
+        .get('http://localhost:5008/v1/products', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(({ data }) => data.data),
   });
 
-  console.log('products', data);
+  if (isLoading) {
+    return <p>Cargando...</p>;
+  }
 
+  if (isError) {
+    return <p>Error al cargar los productos</p>;
+  }
+
+  console.log('products', data);
   return (
     <div className="overflow-x-auto p-4">
       <table className="min-w-full table-auto mt-3 bg-white border rounded">
