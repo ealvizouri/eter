@@ -39,7 +39,7 @@ export default (app: any) => {
     
     products.delete('/',auth,deleteProduct),
     products.get('/',auth,getAllProducts),
-    products.post('/',upload.single('img'), createProduct),
+    products.post('/',upload.single('img'),createProduct),
     products.put('/',upload.single('img'),updateProduct)
   ]);
 
