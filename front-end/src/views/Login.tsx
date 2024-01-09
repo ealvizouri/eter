@@ -7,8 +7,6 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import { User } from '../entities';
 
-// ... (importaciones)
-
 interface FormValues {
   mail: string;
   password: string;
@@ -33,7 +31,13 @@ const Login = () => {
       .then((response) => {
         // Respuesta del servidor
         console.log('Datos enviados', response.data);
-        const userData = response.data; // Token que envía
+        const token = response.data.token; // Acceder al token
+        console.log('Token:', token);
+  
+        // Incluir el token en el encabezado de autorización para futuras solicitudes
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  
+        // Redirigir a la página de listado de productos
         navigate('/list');
       })
       .catch((error) => {
@@ -41,6 +45,7 @@ const Login = () => {
         console.error('Error al hacer la solicitud POST:', error);
       });
   };
+
 
   return (
     <div className="flex items-center justify-center h-screen bg-light bg-slate-700">

@@ -10,7 +10,7 @@ const Show = () => {
   });
 
   console.log('products', data);
-  
+
   return (
     <div className="overflow-x-auto p-4">
       <table className="min-w-full table-auto mt-3 bg-white border rounded">
@@ -31,7 +31,9 @@ const Show = () => {
               <td className="px-4 py-2">{product.created_at}</td>
               <td className="px-4 py-2">{product.quantity}</td>
               <td className="px-4 py-2">{product.name}</td>
-              <td className="px-4 py-2">{product.image}</td>
+              <td className="px-4 py-2">
+                <img src={`uploads/${product.image}`} alt={product.name} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+              </td>
               <td className="px-4 py-2">
                 <Link
                   to={`/editproduct/${product.id}`}
