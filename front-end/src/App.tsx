@@ -6,6 +6,7 @@ import Login from './views/Login';
 import './index.css';
 import Create from './views/Create';
 import Edit from './views/Edit';
+import { useAuth } from './AuthProvider';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/list',
-    element: <Show />,
+    element: <Show token={null} />,
   },
   {
     path: '/list/create',
@@ -34,6 +35,8 @@ function App() {
 
   console.log('products', data);
 
+  const { token } = useAuth(); // Obtén el token desde el contexto AuthProvider
+  
   return (
     <>
       <div>

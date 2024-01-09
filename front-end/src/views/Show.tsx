@@ -2,12 +2,16 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../axios';
 import Link from '../components/Links';
+import { useAuth } from '../AuthProvider';
 
 interface ShowProps {
-  token?: string | null;
+  token: string | null;
 }
 
-const Show: React.FC<ShowProps> = ({ token }) => {
+const Show: React.FC<ShowProps> = () => {
+  const { token } = useAuth(); // Obtén el token del contexto
+
+  console.log('Token en Show:', token);
   const { data, isLoading, isError } = useQuery({
     queryKey: ['prods'],
     queryFn: () =>
