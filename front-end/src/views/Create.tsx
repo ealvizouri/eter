@@ -19,7 +19,7 @@ const Create = () => {
       </Link>
 
       <div className="mt-4">
-        <h2 className="text-2xl font-bold mb-4">Crear Producto</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Crear Producto</h2>
         <Formulario onSubmit={onSubmit} />
       </div>
     </div>
