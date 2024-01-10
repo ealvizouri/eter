@@ -28,14 +28,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const { data } = useQuery({
-    queryKey: ['test'],
-    queryFn: () => axios.get('products').then(({ data }) => data.data),
-  });
-
-  console.log('products', data);
-
-  const { token } = useAuth(); 
   
   return (
     <>
