@@ -5,8 +5,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 interface FormData {
     created_at: string;
     quantity: number;
-    productName: string;
-    img: FileList; // Cambia el tipo a FileList para manejar archivos
+    name: string;
+    image: FileList; // Cambia el tipo a FileList para manejar archivos
 }
 
 interface FormularioProps {
@@ -30,10 +30,10 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
                 <input
                     type="text"
                     id="productName"
-                    {...register('productName', { required: 'Este campo es obligatorio' })}
-                    className={`border p-2 rounded-md w-full ${errors.productName ? 'border-red-500' : 'border-gray-300'}`}
+                    {...register('name', { required: 'Este campo es obligatorio' })}
+                    className={`border p-2 rounded-md w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                 />
-                {errors.productName && <p className="text-red-500 text-sm">{errors.productName.message}</p>}
+                {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
             </div>
 
             <div className="mb-4">
@@ -69,10 +69,10 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
         <input
           type="file"
           id="img"
-          {...register('img', { required: 'Este campo es obligatorio' })}
-          className={`border p-2 rounded-md w-full ${errors.img ? 'border-red-500' : 'border-gray-300'}`}
+          {...register('image', { required: 'Este campo es obligatorio' })}
+          className={`border p-2 rounded-md w-full ${errors.image ? 'border-red-500' : 'border-gray-300'}`}
         />
-        {errors.img && <p className="text-red-500 text-sm">{errors.img.message}</p>}
+        {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
       </div>
 
             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">

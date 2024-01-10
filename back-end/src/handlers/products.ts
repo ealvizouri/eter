@@ -15,6 +15,8 @@ export const getAllProducts = async (req, res, next) => {
 
 export const createProduct = async (req, res, next) => {
   try {
+    console.log('Datos recibidos en createProduct:', req.body);
+
     // Extraer información del archivo de imagen desde la solicitud
     const { filename, path } = req.file;
     

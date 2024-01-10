@@ -10,7 +10,7 @@ const Create = () => {
       const formData = new FormData();
       formData.append('created_at', data.created_at);
       formData.append('quantity', data.quantity);
-      formData.append('productName', data.productName);
+      formData.append('name', data.productName);
       formData.append('img', data.img[0]);
 
       // Ahora utiliza formData para enviar la solicitud
@@ -22,7 +22,7 @@ const Create = () => {
 
       console.log('Respuesta del servidor:', response.data);
     } catch (error) {
-      console.error('Error al enviar la solicitud:', error);
+      console.error('Error al enviar la solicitud front:', error);
     }
   };
 
