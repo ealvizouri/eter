@@ -11,13 +11,12 @@ interface ShowProps {
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { token, setToken } = useAuth(); // Incluye setToken para limpiar el token
-  const navigate = useNavigate(); // Incluye useNavigate para redirigir
+  const { token, setToken } = useAuth(); 
+  const navigate = useNavigate(); 
 
   const handleLogout = () => {
     setToken(null);
 
-    // Redirige al componente de inicio de sesión después de cerrar sesión
     navigate('/');
   };
   console.log('Token en Show:', token);
@@ -47,7 +46,6 @@ const Show: React.FC<ShowProps> = () => {
   console.log('products', data);
   return (
     <div className="overflow-x-auto p-4">
-      {/* Botón para cerrar sesión */}
       <button
         className="bg-red-500 text-white px-4 py-2 rounded"
         onClick={handleLogout}

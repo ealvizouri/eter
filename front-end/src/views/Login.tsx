@@ -1,9 +1,7 @@
-// Login.tsx
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../axiosInstance'; // Importa la instancia de axios
+import axiosInstance from '../axiosInstance'; 
 import '../index.css';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -29,7 +27,7 @@ const Login = () => {
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const response = await axiosInstance.post<User>('/usuarios/login', values); // Utiliza la instancia de axios
+      const response = await axiosInstance.post<User>('/usuarios/login', values); 
       const token = response.data.token;
       console.log('Token:', token);
 
