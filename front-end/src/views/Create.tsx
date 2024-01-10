@@ -2,11 +2,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Formulario from "../components/Form";
+import axios from "axios";
 
 const Create = () => {
-  const onSubmit = (data: any) => {
-    // Aquí se maneja la lógica de envío del formulario
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    try {
+      // Hacer la solicitud POST al backend
+      await axios.post('http://localhost:5008/v1/products', data);
+    
+      // Redirigir al listado después de agregar el producto exitosamente
+      console.log('Producto agregado exitosamente!');
+    } catch (error: any) {
+      // Manejar errores en caso de que la solicitud falle
+      console.error('Error al agregar el producto:', error);
+    
+      // Acceder a las propiedades específicas del error
+      console.log('Mensaje de error:', error.message);
+    
+      // Agrega esta línea para imprimir más detalles sobre la respuesta del servidor
+      console.log('Detalles de la respuesta:', error.response);
+    }
+    
   };
 
   return (
