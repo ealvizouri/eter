@@ -6,7 +6,7 @@ interface FormData {
     created_at: string;
     quantity: number;
     name: string;
-    image: FileList; // Cambia el tipo a FileList para manejar archivos
+    image: FileList; //Uso de FileList para manejar archivos
 }
 
 interface FormularioProps {

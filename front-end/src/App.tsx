@@ -35,7 +35,7 @@ function App() {
 
   console.log('products', data);
 
-  const { token } = useAuth(); // Obtén el token desde el contexto AuthProvider
+  const { token } = useAuth(); 
   
   return (
     <>

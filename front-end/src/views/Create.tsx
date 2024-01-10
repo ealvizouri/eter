@@ -8,7 +8,7 @@ const Create = () => {
   const onSubmit = async (data: any) => {
     try {
       const formData = new FormData();
-      console.log('Datos del formulario:', data); // Agrega esta línea
+      console.log('Datos del formulario:', data); 
 
       formData.append('created_at', data.created_at);
       formData.append('quantity', data.quantity);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate desde react-router-dom
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../index.css';
 import Input from '../components/Input';
@@ -22,7 +22,7 @@ const Login = () => {
   });
 
   const { setToken } = useAuth();
-  const navigate = useNavigate(); // Utiliza useNavigate desde react-router-dom
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (values: FormValues) => {
@@ -79,7 +79,7 @@ const Login = () => {
               border="2px solid #4CAF50"
               color="#4CAF50"
               height="40px"
-              onClick={handleSubmit(onSubmit)} // Utiliza handleSubmit directamente
+              onClick={handleSubmit(onSubmit)}
               radius="5px"
               width="100%"
               className='text-white bg-green-500 rounded-md'
