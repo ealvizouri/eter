@@ -7,22 +7,23 @@ import axios from "axios";
 const Create = () => {
   const onSubmit = async (data: any) => {
     try {
-      // Hacer la solicitud POST al backend
-      await axios.post('http://localhost:5008/v1/products', data);
-    
-      // Redirigir al listado después de agregar el producto exitosamente
-      console.log('Producto agregado exitosamente!');
-    } catch (error: any) {
-      // Manejar errores en caso de que la solicitud falle
-      console.error('Error al agregar el producto:', error);
-    
-      // Acceder a las propiedades específicas del error
-      console.log('Mensaje de error:', error.message);
-    
-      // Agrega esta línea para imprimir más detalles sobre la respuesta del servidor
-      console.log('Detalles de la respuesta:', error.response);
+      const formData = new FormData();
+      formData.append('created_at', data.created_at);
+      formData.append('quantity', data.quantity);
+      formData.append('productName', data.productName);
+      formData.append('img', data.img[0]);
+
+      // Ahora utiliza formData para enviar la solicitud
+      const response = await axios.post('http://localhost:5008/v1/products', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Respuesta del servidor:', response.data);
+    } catch (error) {
+      console.error('Error al enviar la solicitud:', error);
     }
-    
   };
 
   return (
