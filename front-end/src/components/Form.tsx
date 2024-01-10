@@ -63,17 +63,17 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
             </div>
 
             <div className="mb-4">
-        <label htmlFor="img" className="block text-gray-600 font-bold mb-2">
-          Imagen
-        </label>
-        <input
-          type="file"
-          id="img"
-          {...register('image', { required: 'Este campo es obligatorio' })}
-          className={`border p-2 rounded-md w-full ${errors.image ? 'border-red-500' : 'border-gray-300'}`}
-        />
-        {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
-      </div>
+                <label htmlFor="img" className="block text-gray-600 font-bold mb-2">
+                    Imagen
+                </label>
+                <input
+                    type="file"
+                    id="img"
+                    {...register('image', { required: 'Este campo es obligatorio' })}
+                    className={`border p-2 rounded-md w-full ${errors.image ? 'border-red-500' : 'border-gray-300'}`}
+                />
+                {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+            </div>
 
             <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">
                 Enviar
