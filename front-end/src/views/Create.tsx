@@ -1,21 +1,23 @@
-// Create.tsx
 import React from "react";
 import { Link } from "react-router-dom";
 import Formulario from "../components/Form";
-import axios from "axios";
+import axiosInstance from "../axiosInstance"; 
 
 const Create = () => {
   const onSubmit = async (data: any) => {
     try {
       const formData = new FormData();
-      console.log('Datos del formulario:', data); 
+      console.log('Datos del formulario:', data);
 
       formData.append('created_at', data.created_at);
       formData.append('quantity', data.quantity);
       formData.append('name', data.name);
       formData.append('image', data.image[0]);
 
-      const response = await axios.post('http://localhost:5008/v1/products', formData, {
+      const accessToken = localStorage.getItem('accessToken');
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+      const response = await axiosInstance.post('/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
