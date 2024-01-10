@@ -14,9 +14,13 @@ import os from 'os'
 const multer = require('multer')
 //const upload = multer({dest:'../uploads/'})
 
+export const uploadsFolder = `${dirname(
+  dirname(__dirname),
+)}/front-end/public/uploads`
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, `${dirname(__dirname)}/uploads`)
+    cb(null, uploadsFolder)
   },
   filename: function (req, file, cb) {
     const uniqueFilename = `${uuid()}_${file.originalname}`
