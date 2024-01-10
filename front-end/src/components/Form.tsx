@@ -68,7 +68,7 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
                 </label>
                 <input
                     type="file"
-                    id="img"
+                    id="image"
                     {...register('image', { required: 'Este campo es obligatorio' })}
                     className={`border p-2 rounded-md w-full ${errors.image ? 'border-red-500' : 'border-gray-300'}`}
                 />

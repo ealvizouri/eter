@@ -12,7 +12,7 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'D:/ETER/Prueba/Proyecto/eter/back-end/uploads');
+    cb(null, '~/eter/back-end/uploads'); //Se modifico por una ruta general para jesus y aura
   },
   filename: function (req, file, cb) {
     const uniqueFilename = `${uuid()}_${file.originalname}`;
