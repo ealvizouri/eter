@@ -10,10 +10,9 @@ const Create = () => {
       const formData = new FormData();
       formData.append('created_at', data.created_at);
       formData.append('quantity', data.quantity);
-      formData.append('name', data.productName);
-      formData.append('img', data.img[0]);
+      formData.append('name', data.name);
+      formData.append('image', data.image[0]);
 
-      // Ahora utiliza formData para enviar la solicitud
       const response = await axios.post('http://localhost:5008/v1/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
