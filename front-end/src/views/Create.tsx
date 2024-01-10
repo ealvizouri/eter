@@ -1,43 +1,46 @@
 // Create.tsx
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import Formulario from "../components/Form";
-import { useAuth } from "../AuthProvider"; // Importa el contexto de autenticación
-import axiosInstance from "../axiosInstance";
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import Formulario from '../components/Form'
+import { useAuth } from '../AuthProvider' // Importa el contexto de autenticación
+import axiosInstance from '../axiosInstance'
 
 const Create = () => {
-  const { token, setToken } = useAuth();
+  const { token, setToken } = useAuth()
 
   const onSubmit = async (data: any) => {
     try {
-      const formData = new FormData();
-      console.log('Datos del formulario:', data);
-  
-      formData.append('created_at', data.created_at);
-      formData.append('quantity', data.quantity);
-      formData.append('name', data.name);
-      formData.append('image', data.image[0]);
-  
+      const formData = new FormData()
+      console.log('Datos del formulario:', data)
+
+      formData.append('created_at', data.created_at)
+      formData.append('quantity', data.quantity)
+      formData.append('name', data.name)
+      formData.append('img', data.image[0])
+
       // Agrega el token de autorización a la instancia de axios
-      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
       // Agrega estos console.log para depurar
-      console.log('URL de la solicitud:', axiosInstance.defaults.baseURL + '/products');
-      console.log('Datos a enviar:', formData); //Si hay datos
-  
+      console.log(
+        'URL de la solicitud:',
+        axiosInstance.defaults.baseURL + '/products',
+      )
+      console.log('Datos a enviar:', formData) //Si hay datos
+
       //No los manda de este lado
       const response = await axiosInstance.post('/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
-      });
-  
-      console.log('Respuesta del servidor:', response.data);
+      })
+
+      console.log('Respuesta del servidor:', response.data)
     } catch (error) {
-      console.error('Error al enviar la solicitud:', error);
+      console.error('Error al enviar la solicitud:', error)
     }
-  };
+  }
 
   return (
     <div className="p-4">
@@ -53,7 +56,7 @@ const Create = () => {
         <Formulario onSubmit={onSubmit} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Create;
+export default Create
