@@ -4,6 +4,7 @@ import axios from '../axios';
 import Link from '../components/Links';
 import { useAuth } from '../AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosInstance';
 
 interface ShowProps {
   token: string | null;
@@ -23,12 +24,8 @@ const Show: React.FC<ShowProps> = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ['prods'],
     queryFn: () =>
-      axios
-        .get('http://localhost:5008/v1/products', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+      axiosInstance
+        .get('/products')
         .then(({ data }) => data.data),
   });
 
