@@ -19,7 +19,7 @@ export const createProduct = async (req, res, next) => {
     const { filename, path } = req.file
 
     // Almacena la imagen en el sistema de archivos
-    const imagePath = `uploads/${uuid()}_${filename}`
+    const imagePath = `uploads/${filename}`
 
     const newProduct = await db
       .insert(Products)
