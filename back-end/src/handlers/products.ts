@@ -37,6 +37,7 @@ export const createProduct = async (req, res, next) => {
         quantity: Products.quantity,
         image: Products.image,
       })
+    console.log('Nuevo producto insertado:', newProduct);
 
     res.json({
       data: newProduct,

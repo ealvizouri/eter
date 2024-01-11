@@ -44,6 +44,7 @@ const Show: React.FC<ShowProps> = () => {
     );
   }
   console.log('products', data);
+  
   return (
     <div className="overflow-x-auto p-4">
       <button
@@ -65,13 +66,14 @@ const Show: React.FC<ShowProps> = () => {
         </thead>
         <tbody>
           {data?.map((product: any) => (
+            
             <tr key={product.id} className="border-b">
               <td className="px-4 py-2">{product.id}</td>
               <td className="px-4 py-2">{product.created_at}</td>
               <td className="px-4 py-2">{product.quantity}</td>
               <td className="px-4 py-2">{product.name}</td>
               <td className="px-4 py-2">
-                <img src={`${product.image}`} alt={product.name} style={{ maxWidth: '500px', maxHeight: '500px' }} />
+                <img src={`/${product.image}`} alt={product.name} style={{ maxWidth: '500px', maxHeight: '500px' }} />
               </td>
               <td className="px-4 py-2">
                 <Link
