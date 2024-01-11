@@ -1,12 +1,12 @@
-// Create.tsx
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Formulario from '../components/Form'
-import { useAuth } from '../AuthProvider' // Importa el contexto de autenticación
+import { useAuth } from '../AuthProvider' 
 import axiosInstance from '../axiosInstance'
 
 const Create = () => {
   const { token, setToken } = useAuth()
+  const navigate = useNavigate();
 
   const onSubmit = async (data: any) => {
     try {
@@ -37,6 +37,8 @@ const Create = () => {
       })
 
       console.log('Respuesta del servidor:', response.data)
+      navigate('/list');
+
     } catch (error) {
       console.error('Error al enviar la solicitud:', error)
     }
