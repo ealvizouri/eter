@@ -11,8 +11,8 @@ interface ShowProps {
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { token, setToken } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { token, setToken } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     setToken(null);
@@ -71,7 +71,7 @@ const Show: React.FC<ShowProps> = () => {
               <td className="px-4 py-2">{product.quantity}</td>
               <td className="px-4 py-2">{product.name}</td>
               <td className="px-4 py-2">
-                <img src={`uploads/${product.image}`} alt={product.name} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                <img src={`${product.image}`} alt={product.name} style={{ maxWidth: '500px', maxHeight: '500px' }} />
               </td>
               <td className="px-4 py-2">
                 <Link
