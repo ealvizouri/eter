@@ -1,4 +1,5 @@
 export type User = {
+  token: any;
   email: string;
   password: string;
 };
