@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 //import Modal from 'react-modal' para colocar modal
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from '../axios'
 import Link from '../components/Links'
 import { useAuth } from '../AuthProvider'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../axiosInstance'
 import Button from '../components/Button'
-import DeleteConfirmationAlert from '../components/ConfirmAlert'
+import ConfirmAlert from '../components/ConfirmAlert'
+import useModal from '../hooks/useModal'
 
 interface ShowProps {
   token: string | null
@@ -15,10 +16,15 @@ interface ShowProps {
 
 const Show: React.FC<ShowProps> = () => {
   const { token, setToken } = useAuth()
+  const { isOpen, open: openModal, close: closeModal } = useModal()
   const navigate = useNavigate()
 
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const [deleteProductId, setDeleteProductId] = useState<string | null>(null)
+
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => axiosInstance.get('/products').then(({ data }) => data.data),
+  })
 
   const handleLogout = () => {
     setToken(null)
@@ -27,20 +33,23 @@ const Show: React.FC<ShowProps> = () => {
 
   const confirmDelete = (productId: string) => {
     setDeleteProductId(productId)
-    setIsModalVisible(true)
+    openModal()
   }
 
   const handleCancelDelete = () => {
-    setIsModalVisible(false)
+    closeModal()
     setDeleteProductId(null)
   }
 
   const handleConfirmDelete = async () => {
-    setIsModalVisible(false)
+    closeModal()
     if (deleteProductId) {
       try {
         // Lógica para eliminar el producto en el servidor
-        await axiosInstance.delete(`/products/${deleteProductId}`)
+        await axiosInstance.delete(`/products`, {
+          data: { id: deleteProductId },
+        })
+        refetch()
         // Volver a cargar los datos después de la eliminación
         // ( recargar la página o volver a hacer la consulta para obtener los productos actualizados)
       } catch (error) {
@@ -49,11 +58,6 @@ const Show: React.FC<ShowProps> = () => {
       }
     }
   }
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['prods'],
-    queryFn: () => axiosInstance.get('/products').then(({ data }) => data.data),
-  })
 
   if (isLoading) {
     return (
@@ -83,11 +87,15 @@ const Show: React.FC<ShowProps> = () => {
       >
         Cerrar Sesión
       </button>
-      {isModalVisible && (
-        <DeleteConfirmationAlert
+      {isOpen && (
+        <ConfirmAlert
+          isOpen={isOpen}
+          close={closeModal}
           onCancel={handleCancelDelete}
           onConfirm={handleConfirmDelete}
-        />
+        >
+          ¿Estás seguro que deseas eliminar este producto?
+        </ConfirmAlert>
       )}
       <table className="min-w-full table-auto mt-3 bg-white border rounded">
         <thead>
@@ -128,13 +136,8 @@ const Show: React.FC<ShowProps> = () => {
                 <td className="px-4 py-2">
                   <td className="px-4 py-2">
                     <Button
-                      border="2px solid #E41A02"
-                      color="#E41A02"
-                      height="40px"
                       onClick={() => confirmDelete(product.id)}
-                      radius="5px"
-                      width="100%"
-                      className="text-white bg-green-500 rounded-md"
+                      className="text-white bg-red-500 hover:bg-red-600 rounded-md"
                     >
                       Eliminar
                     </Button>
