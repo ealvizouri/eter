@@ -18,29 +18,36 @@ const Edit = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        })
-//use query, isSucces
-//gardar localstorage sessionstorage
-        const productData = response.data.data
-
-        // Establecer los valores iniciales del formulario
-        reset({
-          name: productData.name,
-          quantity: productData.quantity,
-          created_at: productData.created_at,
-          // Traer imagen?
-        })
+        });
+  
+        const productData = response.data.data;
+  
+        if (Array.isArray(productData) && productData.length > 0) {
+          // Obtén el primer elemento del array si es un array
+          const product = productData[0];
+  
+          // Establecer los valores iniciales del formulario
+          reset({
+            name: product.name,
+            quantity: product.quantity,
+            created_at: product.created_at,
+            // Traer imagen?
+          });
+        } else {
+          console.error('Error: No se encontraron datos del producto.');
+        }
       } catch (error) {
-        console.error('Error al obtener los datos del producto:', error)
+        console.error('Error al obtener los datos del producto:', error);
       }
-    }
-
-    fetchProductData()
-  }, [id, token, reset])
+    };
+  
+    fetchProductData();
+  }, [id, reset, token]);
+  
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await axiosInstance.put(`/products/${id}`, data, {
+      const response = await axiosInstance.put(`/products/${id}`, data, { //Para mandar el id
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

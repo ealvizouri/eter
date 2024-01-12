@@ -46,8 +46,8 @@ export default (app: any) => {
     products.delete('/', auth, deleteProduct),
     products.get('/', auth, getAllProducts),
     products.post('/', auth,upload.single('img'), createProduct),
-    products.put('/', upload.single('img'), updateProduct),
-    products.get('/product', getProduct),
+    products.put('/',auth, upload.single('img'), updateProduct),
+    products.get('/product',auth, getProduct),
 
   ])
 
