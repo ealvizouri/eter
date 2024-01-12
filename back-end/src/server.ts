@@ -2,7 +2,6 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import setUpRoutes from './routes'
-import path from 'path'
 
 const app = express()
 
