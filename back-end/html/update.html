@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UPDATE</title>
+  </head>
+  <body>
+    <h1>UPDATE</h1>
+    <form action="/v1/products" method="put" enctype="multipart/form-data">
+      <label for="id">id del producto:</label>
+      <input type="text" name="id" id="id" required>
+      <br>
+      <label for="name">Nombre del producto:</label>
+      <input type="text" name="name" id="name" required>
+      <br>
+      <label for="img">Imagen del producto:</label>
+      <input type="file" name="img" id="img" required>
+      <br>
+      <input type="submit" value="Guardar">
+    </form>
+  </body>
+</html>

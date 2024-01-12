@@ -2,6 +2,7 @@ import { Router } from 'express'
 import {
   createProduct,
   getAllProducts,
+  getProduct,
   updateProduct,
   deleteProduct,
 } from './handlers/products'
@@ -44,14 +45,20 @@ export default (app: any) => {
   products.use('/products', [
     products.delete('/', auth, deleteProduct),
     products.get('/', auth, getAllProducts),
-    products.post('/', auth, upload.single('img'), createProduct),
-    products.put('/', auth, upload.single('img'), updateProduct),
+    products.post('/', auth,upload.single('img'), createProduct),
+    products.put('/', upload.single('img'), updateProduct),
+    products.get('/product', getProduct),
+
   ])
 
   const views = Router()
   views.use('/html', [
     views.get('/upload', (req, res) => {
       const filePath = path.join(__dirname, '../html/upload.html')
+      res.sendFile(filePath)
+    }),
+    views.get('/update', (req, res) => {
+      const filePath = path.join(__dirname, '../html/update.html')
       res.sendFile(filePath)
     }),
   ])
