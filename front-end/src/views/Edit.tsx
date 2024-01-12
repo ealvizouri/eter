@@ -19,7 +19,8 @@ const Edit = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-
+//use query, isSucces
+//gardar localstorage sessionstorage
         const productData = response.data.data
 
         // Establecer los valores iniciales del formulario
