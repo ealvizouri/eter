@@ -5,3 +5,4 @@ back-end/uploads/*
 front-end/node_modules
 
 .DS_Store
+sqlite.db
