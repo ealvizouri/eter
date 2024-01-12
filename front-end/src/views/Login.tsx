@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../axiosInstance'; 
-import '../index.css';
-import Input from '../components/Input';
-import Button from '../components/Button';
-import { User } from '../entities';
-import { useAuth } from '../AuthProvider';
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import axiosInstance from '../axiosInstance'
+import '../index.css'
+import Input from '../components/Input'
+import Button from '../components/Button'
+import { User } from '../entities'
+import { useAuth } from '../AuthProvider'
 
 interface FormValues {
-  mail: string;
-  password: string;
+  mail: string
+  password: string
 }
 
 const Login = () => {
@@ -19,31 +19,33 @@ const Login = () => {
       mail: '',
       password: '',
     },
-  });
+  })
 
-  const { setToken } = useAuth();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  const { setToken } = useAuth()
+  const navigate = useNavigate()
+  const [showPassword, setShowPassword] = useState(false)
 
   const onSubmit = async (values: FormValues) => {
     try {
-      const response = await axiosInstance.post<User>('/usuarios/login', values); 
-      const token = response.data.token;
-      console.log('Token:', token);
+      const response = await axiosInstance.post<User>('/usuarios/login', values)
+      const token = response.data.token
+      console.log('Token:', token)
 
-      setToken(token);
-      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      setToken(token)
+      axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`
 
-      navigate('/list');
+      navigate('/list')
     } catch (error) {
-      console.error('Error al hacer la solicitud POST:', error);
+      console.error('Error al hacer la solicitud POST:', error)
     }
-  };
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-light bg-slate-700">
       <div className="w-3/4 md:w-1/2 lg:w-1/3 xl:w-1/4 border bg-white shadow p-8 rounded">
-        <h1 className="text-center font-bold text-black text-2xl mb-6">Inicio de Sesión</h1>
+        <h1 className="text-center font-bold text-black text-2xl mb-6">
+          Inicio de Sesión
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
             <Input
@@ -82,7 +84,7 @@ const Login = () => {
               onClick={handleSubmit(onSubmit)}
               radius="5px"
               width="100%"
-              className='text-white bg-green-500 rounded-md'
+              className="text-white bg-green-500 rounded-md"
             >
               Enviar
             </Button>
@@ -90,7 +92,7 @@ const Login = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
