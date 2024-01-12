@@ -9,13 +9,14 @@ import axiosInstance from '../axiosInstance'
 import Button from '../components/Button'
 import ConfirmAlert from '../components/ConfirmAlert'
 import useModal from '../hooks/useModal'
+import { STORAGE_AUTH_TOKEN } from '../defaults/storage_keys'
 
 interface ShowProps {
   token: string | null
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { token, setToken } = useAuth()
+  const { setToken } = useAuth()
   const { isOpen, open: openModal, close: closeModal } = useModal()
   const navigate = useNavigate()
 
@@ -27,6 +28,7 @@ const Show: React.FC<ShowProps> = () => {
   })
 
   const handleLogout = () => {
+    localStorage.removeItem(STORAGE_AUTH_TOKEN)
     setToken(null)
     navigate('/')
   }
