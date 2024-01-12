@@ -44,14 +44,17 @@ export default (app: any) => {
 
   const products = Router()
   products.use('/products', [
-
     products.delete('/:id', auth, deleteProduct),
-    products.get('/', getAllProducts),
-    products.post('/',vanewproduct, upload.single('img'), createProduct),
-    products.put('/:id', auth,vanewproduct, upload.single('img'), updateProduct),
+    products.get('/all', getAllProducts),
+    products.post('/', vanewproduct, upload.single('img'), createProduct),
+    products.put(
+      '/:id',
+      auth,
+      vanewproduct,
+      upload.single('img'),
+      updateProduct,
+    ),
     products.get('/:id', getProduct),
-
-   
   ])
 
   const views = Router()

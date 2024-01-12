@@ -24,7 +24,8 @@ const Show: React.FC<ShowProps> = () => {
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['products'],
-    queryFn: () => axiosInstance.get('/products').then(({ data }) => data.data),
+    queryFn: () =>
+      axiosInstance.get('/products/all').then(({ data }) => data.data),
   })
 
   const handleLogout = () => {
