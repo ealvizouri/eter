@@ -11,6 +11,7 @@ import path, { dirname } from 'path'
 import uuid from './modules/uuid'
 import { auth } from './modules/auth'
 import os from 'os'
+import { vanewproduct } from './modules/validation'
 
 const multer = require('multer')
 //const upload = multer({dest:'../uploads/'})
@@ -43,11 +44,11 @@ export default (app: any) => {
 
   const products = Router()
   products.use('/products', [
-    products.delete('/', auth, deleteProduct),
-    products.get('/', auth, getAllProducts),
-    products.post('/', auth,upload.single('img'), createProduct),
-    products.put('/', upload.single('img'), updateProduct),
-    products.get('/product', getProduct),
+    products.delete('/:id', auth, deleteProduct),
+    products.get('/', getAllProducts),
+    products.post('/',vanewproduct, upload.single('img'), createProduct),
+    products.put('/:id', auth,vanewproduct, upload.single('img'), updateProduct),
+    products.get('/:id', getProduct),
 
   ])
 

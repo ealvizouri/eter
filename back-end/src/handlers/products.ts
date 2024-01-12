@@ -14,7 +14,7 @@ export const getAllProducts = async (req, res, next) => {
 }
 
 export const getProduct = async (req, res, next) => {
-  const id = req.body.id
+  const id = req.params.id
   //const name = req.body.name
   const Product = await db
   .select()
@@ -85,7 +85,7 @@ export const updateProduct = async (req, res, next) => {
     // Almacena la imagen en el sistema de archivos
     const imagePath = `uploads/${filename}`;
 
-    const id = req.body.id;
+    const id = req.params.id;
 
     // Obtener información del producto existente
     const existingProduct = await db

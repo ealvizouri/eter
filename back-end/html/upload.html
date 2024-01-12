@@ -6,12 +6,16 @@
   <body>
     <h1>UPLOAD</h1>
     <form action="/v1/products" method="post" enctype="multipart/form-data">
+      <label for="quantity">cantidad:</label>
+      <input type="number" name="quantity" id="quantity" required>
+      <br>
       <label for="name">Nombre del producto:</label>
       <input type="text" name="name" id="name" required>
       <br>
       <label for="img">Imagen del producto:</label>
       <input type="file" name="img" id="img" required>
       <br>
+      
       <input type="submit" value="Guardar">
     </form>
   </body>
