@@ -3,14 +3,13 @@ import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface FormData {
-  created_at: string
   quantity: number
   name: string
-  image: FileList //Uso de FileList para manejar archivos
+  image: FileList
 }
 
 interface FormularioProps {
-  onSubmit: SubmitHandler<FormData>
+  onSubmit: SubmitHandler<FormData>;
   initialValues?: FormData
 }
 
@@ -36,7 +35,7 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
         </label>
         <input
           type="text"
-          id="productName"
+          id="name"
           {...register('name', { required: 'Este campo es obligatorio' })}
           className={`border p-2 rounded-md w-full ${
             errors.name ? 'border-red-500' : 'border-gray-300'
