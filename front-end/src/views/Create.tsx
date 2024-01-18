@@ -16,7 +16,7 @@ const Create = () => {
       formData.append('created_at', data.created_at)
       formData.append('quantity', data.quantity)
       formData.append('name', data.name)
-      formData.append('img', data.image[0])
+      formData.append('image', data.image[0])
 
       // Agrega el token de autorización a la instancia de axios
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -26,15 +26,14 @@ const Create = () => {
         'URL de la solicitud:',
         axiosInstance.defaults.baseURL + '/products',
       )
-      console.log('Datos a enviar:', formData) //Si hay datos
 
-      //No los manda de este lado
       const response = await axiosInstance.post('/products', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
       })
+      
 
       console.log('Respuesta del servidor:', response.data)
       navigate('/list');
