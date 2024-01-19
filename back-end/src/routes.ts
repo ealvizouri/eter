@@ -13,6 +13,7 @@ import { auth } from './modules/auth'
 import os from 'os'
 import { vanewproduct } from './modules/validation'
 
+const v1 = '/v1'
 const multer = require('multer')
 //const upload = multer({dest:'../uploads/'})
 
@@ -35,41 +36,51 @@ const upload = multer({ storage: storage })
 const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }])
 
 export default (app: any) => {
-  const users = Router()
-  users.use('/usuarios', [
-    users.get('/', getAllUsers),
-    users.post('/', singUp),
-    users.post('/login', loginUser),
-  ])
+  const usersPrefix = '/usuarios'
+  app.get(v1 + usersPrefix, getAllUsers)
+  app.post(v1 + usersPrefix, singUp)
+  app.post(`${v1}${usersPrefix}/login`, loginUser)
 
-  const products = Router()
-  products.use('/products', [
-    products.delete('/:id', auth, deleteProduct),
-    products.get('/all', getAllProducts),
-    products.post('/', vanewproduct, upload.single('img'), createProduct),
-    products.put(
-      '/:id',
-      auth,
-      vanewproduct,
-      upload.single('img'),
-      updateProduct,
-    ),
-    products.get('/:id', getProduct),
-  ])
+  const productsPrefix = '/products'
+  app.get(v1 + productsPrefix, getAllProducts)
+  app.post(
+    v1 + productsPrefix,
+    (req, res, next) => {
+      console.log('Datos recibidos en createProduct:', req.body)
+      next()
+    },
+    // vanewproduct,
+    upload.single('img'),
+    createProduct,
+  )
+  app.delete(`${v1}${productsPrefix}/:id`, auth, deleteProduct)
+  app.put(
+    `${v1}${productsPrefix}/:id`,
+    auth,
+    vanewproduct,
+    upload.single('img'),
+    updateProduct,
+  )
+  app.get(`${v1}${productsPrefix}/:id`, getProduct)
 
-  const views = Router()
-  views.use('/html', [
-    views.get('/upload', (req, res) => {
-      const filePath = path.join(__dirname, '../html/upload.html')
-      res.sendFile(filePath)
-    }),
-    views.get('/update', (req, res) => {
-      const filePath = path.join(__dirname, '../html/update.html')
-      res.sendFile(filePath)
-    }),
-  ])
+  const viewsPrefis = '/html'
+  app.get(`${v1}${viewsPrefis}/upload`, (req, res) => {
+    const filePath = path.join(__dirname, '../html/upload.html')
+    res.sendFile(filePath)
+  })
+  app.get(`${v1}${viewsPrefis}/update`, (req, res) => {
+    const filePath = path.join(__dirname, '../html/update.html')
+    res.sendFile(filePath)
+  })
 
-  app.use('/v1', [products])
-  app.use('/v1', [users])
-  app.use('/v1', [views])
+  app._router.stack.forEach(function (r) {
+    if (r.route && r.route.path) {
+      console.log(
+        Object.keys(r.route.methods ?? [])
+          .pop()
+          ?.toUpperCase(),
+        r.route.path,
+      )
+    }
+  })
 }

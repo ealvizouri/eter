@@ -1,22 +1,21 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Formulario from '../components/Form'
-import { useAuth } from '../AuthProvider' 
+import { useAuth } from '../AuthProvider'
 import axiosInstance from '../axiosInstance'
 
 const Create = () => {
   const { token, setToken } = useAuth()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const onSubmit = async (data: any) => {
     try {
       const formData = new FormData()
       console.log('Datos del formulario:', data)
 
-      formData.append('created_at', data.created_at)
       formData.append('quantity', data.quantity)
       formData.append('name', data.name)
-      formData.append('image', data.image[0])
+      formData.append('img', data.image[0])
 
       // Agrega el token de autorización a la instancia de axios
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -33,11 +32,9 @@ const Create = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      
 
       console.log('Respuesta del servidor:', response.data)
-      navigate('/list');
-
+      navigate('/list')
     } catch (error) {
       console.error('Error al enviar la solicitud:', error)
     }
