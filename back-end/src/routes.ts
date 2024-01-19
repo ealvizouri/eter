@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }])
+const cpUpload = upload.fields([{ name: 'image', maxCount: 1 }])
 
 export default (app: any) => {
   const usersPrefix = '/usuarios'
@@ -45,20 +45,17 @@ export default (app: any) => {
   app.get(v1 + productsPrefix, getAllProducts)
   app.post(
     v1 + productsPrefix,
-    (req, res, next) => {
-      console.log('Datos recibidos en createProduct:', req.body)
-      next()
-    },
-    // vanewproduct,
-    upload.single('img'),
+    upload.single('image'),
+    auth,
+    vanewproduct,
     createProduct,
   )
   app.delete(`${v1}${productsPrefix}/:id`, auth, deleteProduct)
   app.put(
     `${v1}${productsPrefix}/:id`,
+    upload.single('image'),
     auth,
     vanewproduct,
-    upload.single('img'),
     updateProduct,
   )
   app.get(`${v1}${productsPrefix}/:id`, getProduct)
