@@ -19,9 +19,6 @@ export const vanewproduct = async (
   res: Response,
   next: NextFunction,
 ) => {
-  console.log(req.body)
-  console.log(req.query)
-  console.log(req.params)
   const { body } = req
 
   if (!body.quantity) {
@@ -34,7 +31,8 @@ export const vanewproduct = async (
     return res.status(400).json({ message: 'El campo "name" es obligatorio.' })
   }
 
-  if (!body.image) {
+  // @ts-ignore
+  if (!req.file) {
     return res.status(400).json({ message: 'El campo "image" es obligatorio.' })
   }
 

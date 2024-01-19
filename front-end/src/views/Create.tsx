@@ -15,7 +15,7 @@ const Create = () => {
 
       formData.append('quantity', data.quantity)
       formData.append('name', data.name)
-      formData.append('img', data.image[0])
+      formData.append('image', data.image[0])
 
       // Agrega el token de autorización a la instancia de axios
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`

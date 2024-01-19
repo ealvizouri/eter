@@ -20,11 +20,11 @@ app.use('/uploads', express.static(path.join(__dirname, '../front-end/public/upl
 console.log('Configuración de archivos estáticos para imágenes:', path.join(__dirname, '../front-end/public/uploads'));
 */
 
+setUpRoutes(app)
+
 app.get('/', (req, res) => {
   res.json({ status: 'Ok' })
 })
-
-setUpRoutes(app)
 
 app.use((err, req, res, _) => {
   console.error(err)
