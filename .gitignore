@@ -3,6 +3,7 @@ back-end/sqlite.db
 back-end/uploads/*
 
 front-end/node_modules
+front-end/public/uploads/*
 
 .DS_Store
 sqlite.db
