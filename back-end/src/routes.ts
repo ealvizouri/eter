@@ -37,7 +37,7 @@ const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }])
 export default (app: any) => {
   const users = Router()
   users.use('/usuarios', [
-    users.get('/', getAllUsers),
+    users.get('/all', getAllUsers),
     users.post('/', singUp),
     users.post('/login', loginUser),
   ])

@@ -121,7 +121,7 @@ export const updateProduct = async (req, res, next) => {
       data: editProduct,
     });
   } catch (error) {
-    console.error('Error al crear un nuevo producto:', error);
+    console.error('Error al editar producto:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
