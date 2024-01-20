@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Formulario from '../components/Form'
 import Link from '../components/Links'
 import { useAuth } from '../AuthProvider'
@@ -10,6 +10,8 @@ const Edit = () => {
   const { token, setToken } = useAuth()
   const { id } = useParams()
   const { register, handleSubmit, reset, formState } = useForm()
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -46,22 +48,32 @@ const Edit = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await axiosInstance.put(`/products/${id}`, data, {
-        //Para mandar el id
+      const formData = new FormData();
+  
+      // Adjuntar campos al FormData
+      formData.append('name', data.name);
+      formData.append('quantity', data.quantity);
+  
+      // Verificar si hay una imagen antes de adjuntarla
+      if (data.image && data.image[0]) {
+        formData.append('image', data.image[0]);
+      }
+  
+      // Enviar la solicitud con el FormData
+      const response = await axiosInstance.put(`/products/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
-      })
+      });
+  
+      console.log('Respuesta del servidor después de la modificación:', response.data);
+      navigate('/list')
 
-      console.log(
-        'Respuesta del servidor después de la modificación:',
-        response.data,
-      )
     } catch (error) {
-      console.error('Error al enviar la solicitud de modificación:', error)
+      console.error('Error al enviar la solicitud de modificación:', error);
     }
-  }
+  };
 
   const formularioProps = {
     onSubmit,
