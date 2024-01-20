@@ -36,8 +36,6 @@ const upload = multer({ storage: storage })
 const cpUpload = upload.fields([{ name: 'image', maxCount: 1 }])
 
 export default (app: any) => {
- 
-
   const productsPrefix = '/products'
   const usersPrefix = '/usuarios'
 
@@ -49,17 +47,18 @@ export default (app: any) => {
     vanewproduct,
     createProduct,
   )
-  app.delete(`${v1}${productsPrefix}/:id`, auth, deleteProduct)
   app.put(
     `${v1}${productsPrefix}/:id`,
     upload.single('image'),
+    auth,
     updateProduct,
   )
+  app.delete(`${v1}${productsPrefix}/:id`, auth, deleteProduct)
   app.get(`${v1}${productsPrefix}/:id`, getProduct)
 
-  app.get( v1 + usersPrefix,getAllUsers )
-  app.post(v1 + usersPrefix ,singUp)
-  app.post(v1 + usersPrefix + "/login",loginUser)
+  app.get(v1 + usersPrefix, getAllUsers)
+  app.post(v1 + usersPrefix, singUp)
+  app.post(v1 + usersPrefix + '/login', loginUser)
 
   const viewsPrefis = '/html'
   app.get(`${v1}${viewsPrefis}/upload`, (req, res) => {

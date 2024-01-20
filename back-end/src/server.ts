@@ -28,6 +28,12 @@ app.get('/', (req, res) => {
 
 app.use((err, req, res, _) => {
   console.error(err)
+  if (err.name === 'MulterError') {
+    res
+      .status(404)
+      .json({ name: err.name, message: err.message, code: err.code })
+    return
+  }
   res.status(404).json({ message: `not found` })
 })
 
