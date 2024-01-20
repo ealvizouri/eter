@@ -39,6 +39,8 @@ export default (app: any) => {
  
 
   const productsPrefix = '/products'
+  const usersPrefix = '/usuarios'
+
   app.get(v1 + productsPrefix, getAllProducts)
   app.post(
     v1 + productsPrefix,
@@ -51,11 +53,13 @@ export default (app: any) => {
   app.put(
     `${v1}${productsPrefix}/:id`,
     upload.single('image'),
-    auth,
-    vanewproduct,
     updateProduct,
   )
   app.get(`${v1}${productsPrefix}/:id`, getProduct)
+
+  app.get( v1 + usersPrefix,getAllUsers )
+  app.post(v1 + usersPrefix ,singUp)
+  app.post(v1 + usersPrefix + "/login",loginUser)
 
   const viewsPrefis = '/html'
   app.get(`${v1}${viewsPrefis}/upload`, (req, res) => {

@@ -80,46 +80,28 @@ export const updateProduct = async (req, res, next) => {
     console.log('Datos recibidos en update:', req.body);
 
     // Extraer información del archivo de imagen desde la solicitud
-    const { filename, path } = req.file;
+    const { filename } = req.file;
 
     // Almacena la imagen en el sistema de archivos
     const imagePath = `uploads/${filename}`;
 
-    const id = req.params.id;
+    const id = req.body.id
 
-    // Obtener información del producto existente
-    const existingProduct = await db
-      .select()
-      .from(Products)
-      .where(eq(Products.id, id));
-
-    // Eliminar la imagen anterior si existe
-    if (existingProduct.length > 0 && existingProduct[0].image) {
-      const previousImagePath = `uploads/${existingProduct[0].image}`;
-      fs.unlinkSync(previousImagePath);
-    }
+    
 
     // Actualizar el producto en la base de datos
-    const editProduct = await db
-      .update(Products)
-      .set({
-        created_at: req.body.created_at,
-        quantity: req.body.quantity,
-        name: req.body.name,
-        image: imagePath,
-      })
-      .where(eq(Products.id, id))
-      .returning({
-        id: Products.id,
-        name: Products.name,
-        created_at: Products.created_at,
-        quantity: Products.quantity,
-        image: Products.image,
-      });
+    const updatedRows = await db.update(Products)
+    .set({
+      quantity: req.body.quantity,
+      name: req.body.name,
+      image: imagePath,
+    })
+      .where(eq(Products.id, id));
 
-    res.json({
-      data: editProduct,
-    });
+      res.json({
+        data: updatedRows,
+      });
+    
   } catch (error) {
     console.error('Error al editar producto:', error);
     res.status(500).json({ error: 'Error interno del servidor' });
