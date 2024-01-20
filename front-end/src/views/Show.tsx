@@ -48,20 +48,15 @@ const Show: React.FC<ShowProps> = () => {
     if (deleteProductId) {
       try {
         // Lógica para eliminar el producto en el servidor
-        await axiosInstance.delete(`/products?id=${deleteProductId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        refetch();
+        await axiosInstance.delete(`/products/${deleteProductId}`)
+        refetch()
         // Volver a cargar los datos después de la eliminación
         // ( recargar la página o volver a hacer la consulta para obtener los productos actualizados)
       } catch (error) {
-        console.error('Error al eliminar el producto:', error);
+        console.error('Error al eliminar el producto:', error)
         // Manejo de error, por ejemplo, mostrar un mensaje al usuario
       }
     }
-    
   }
 
   if (isLoading) {
