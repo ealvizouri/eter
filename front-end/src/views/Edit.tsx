@@ -12,7 +12,6 @@ const Edit = () => {
   const { register, handleSubmit, reset, formState } = useForm()
   const navigate = useNavigate()
 
-
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -27,14 +26,11 @@ const Edit = () => {
 
         if (Array.isArray(productData) && productData.length > 0) {
           const product = productData[0]
-
-          // Establecer los valores iniciales del formulario
           reset({
             name: product.name,
             quantity: product.quantity,
-            image: product.image,
+            image: product.image || null, // Asegurarse de que sea un valor válido para el input de tipo file
           })
-
         } else {
           console.error('Error: No se encontraron datos del producto.')
         }
@@ -48,32 +44,34 @@ const Edit = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const formData = new FormData();
-  
+      const formData = new FormData()
+
       // Adjuntar campos al FormData
-      formData.append('name', data.name);
-      formData.append('quantity', data.quantity);
-  
+      formData.append('name', data.name)
+      formData.append('quantity', data.quantity)
+
       // Verificar si hay una imagen antes de adjuntarla
       if (data.image && data.image[0]) {
-        formData.append('image', data.image[0]);
+        formData.append('image', data.image[0])
       }
-  
+
       // Enviar la solicitud con el FormData
       const response = await axiosInstance.put(`/products/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
-      });
-  
-      console.log('Respuesta del servidor después de la modificación:', response.data);
-      navigate('/list')
+      })
 
+      console.log(
+        'Respuesta del servidor después de la modificación:',
+        response.data,
+      )
+      navigate('/list')
     } catch (error) {
-      console.error('Error al enviar la solicitud de modificación:', error);
+      console.error('Error al enviar la solicitud de modificación:', error)
     }
-  };
+  }
 
   const formularioProps = {
     onSubmit,
