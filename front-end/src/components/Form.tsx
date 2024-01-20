@@ -1,15 +1,15 @@
 // Formulario.tsx
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
 interface FormData {
   quantity: number
   name: string
-  image: FileList
+  image: FileList | null
 }
 
 interface FormularioProps {
-  onSubmit: SubmitHandler<FormData>;
+  onSubmit: SubmitHandler<FormData>
   initialValues?: FormData
 }
 
@@ -19,6 +19,8 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ defaultValues: initialValues })
+
+  console.log('Valor de initialValues.name:', initialValues?.image) // Agrega esta línea
 
   return (
     <form
@@ -40,7 +42,8 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
           className={`border p-2 rounded-md w-full ${
             errors.name ? 'border-red-500' : 'border-gray-300'
           }`}
-        />
+          defaultValue={initialValues?.name || ''}
+          />
         {errors.name && (
           <p className="text-red-500 text-sm">{errors.name.message}</p>
         )}
@@ -60,7 +63,8 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
           className={`border p-2 rounded-md w-full ${
             errors.quantity ? 'border-red-500' : 'border-gray-300'
           }`}
-        />
+          defaultValue={initialValues?.quantity || ''}
+          />
         {errors.quantity && (
           <p className="text-red-500 text-sm">{errors.quantity.message}</p>
         )}
@@ -76,6 +80,7 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
           className={`border p-2 rounded-md w-full ${
             errors.image ? 'border-red-500' : 'border-gray-300'
           }`}
+          
         />
         {errors.image && (
           <p className="text-red-500 text-sm">{errors.image.message}</p>
@@ -92,4 +97,5 @@ const Formulario: React.FC<FormularioProps> = ({ onSubmit, initialValues }) => {
   )
 }
 
-export default Formulario
+export default Formulario;
+
