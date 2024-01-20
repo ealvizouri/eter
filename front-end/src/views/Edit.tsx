@@ -26,13 +26,6 @@ const Edit = () => {
         if (Array.isArray(productData) && productData.length > 0) {
           const product = productData[0]
 
-          // Asegúrate de que los nombres de los campos coincidan exactamente
-          console.log('Antes de reset:', {
-            name: product.name,
-            quantity: product.quantity,
-            image: product.image,
-          })
-
           // Establecer los valores iniciales del formulario
           reset({
             name: product.name,
@@ -40,11 +33,6 @@ const Edit = () => {
             image: product.image,
           })
 
-          console.log('Después de reset:', {
-            name: product.name,
-            quantity: product.quantity,
-            image: product.image,
-          })
         } else {
           console.error('Error: No se encontraron datos del producto.')
         }

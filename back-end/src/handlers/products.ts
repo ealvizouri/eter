@@ -66,7 +66,7 @@ export const createProduct = async (req, res, next) => {
 
 export const deleteProduct = async (req, res, next) => {
   const id = req.body.id
-  //const name = req.body.name
+
   const deleteProduct = await db.delete(Products).where(eq(Products.id, id))
 
   res.json({

@@ -16,7 +16,7 @@ interface ShowProps {
 }
 
 const Show: React.FC<ShowProps> = () => {
-  const { setToken } = useAuth()
+  const { token, setToken } = useAuth()
   const { isOpen, open: openModal, close: closeModal } = useModal()
   const navigate = useNavigate()
 
@@ -48,17 +48,20 @@ const Show: React.FC<ShowProps> = () => {
     if (deleteProductId) {
       try {
         // Lógica para eliminar el producto en el servidor
-        await axiosInstance.delete(`/products`, {
-          data: { id: deleteProductId },
-        })
-        refetch()
+        await axiosInstance.delete(`/products?id=${deleteProductId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        refetch();
         // Volver a cargar los datos después de la eliminación
         // ( recargar la página o volver a hacer la consulta para obtener los productos actualizados)
       } catch (error) {
-        console.error('Error al eliminar el producto:', error)
+        console.error('Error al eliminar el producto:', error);
         // Manejo de error, por ejemplo, mostrar un mensaje al usuario
       }
     }
+    
   }
 
   if (isLoading) {
