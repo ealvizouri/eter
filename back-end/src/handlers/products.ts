@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm'
 import { db } from '../modules/drizzle'
 import uuid from '../modules/uuid'
 import { Products } from '../schema'
+import * as fs from 'fs';
 
 export const getAllProducts = async (req, res, next) => {
   const allProducts = await db.select().from(Products)
