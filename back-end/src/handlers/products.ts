@@ -2,8 +2,6 @@ import { eq } from 'drizzle-orm'
 import { db } from '../modules/drizzle'
 import uuid from '../modules/uuid'
 import { Products } from '../schema'
-import fs from 'fs';
-
 
 export const getAllProducts = async (req, res, next) => {
   const allProducts = await db.select().from(Products)
@@ -16,16 +14,12 @@ export const getAllProducts = async (req, res, next) => {
 export const getProduct = async (req, res, next) => {
   const id = req.params.id
   //const name = req.body.name
-  const Product = await db
-  .select()
-  .from(Products)
-  .where(eq(Products.id, id));
+  const Product = await db.select().from(Products).where(eq(Products.id, id))
 
   res.json({
     data: Product,
   })
 }
-
 
 export const createProduct = async (req, res, next) => {
   try {
@@ -53,7 +47,7 @@ export const createProduct = async (req, res, next) => {
         quantity: Products.quantity,
         image: Products.image,
       })
-    console.log('Nuevo producto insertado:', newProduct);
+    console.log('Nuevo producto insertado:', newProduct)
 
     res.json({
       data: newProduct,
@@ -65,8 +59,8 @@ export const createProduct = async (req, res, next) => {
 }
 
 export const deleteProduct = async (req, res, next) => {
-  const id = req.body.id
-  //const name = req.body.name
+  const id = req.params.id
+
   const deleteProduct = await db.delete(Products).where(eq(Products.id, id))
 
   res.json({
@@ -75,10 +69,10 @@ export const deleteProduct = async (req, res, next) => {
 }
 export const updateProduct = async (req, res, next) => {
   try {
-    console.log('Datos recibidos en update:', req.body);
+    console.log('Datos recibidos en update:', req.body)
 
     // Extraer información del archivo de imagen desde la solicitud
-    const { filename } = req.file;
+    const { filename } = req.file
 
     // Almacena la imagen en el sistema de archivos
     const imagePath = `uploads/${filename}`;
@@ -97,22 +91,23 @@ export const updateProduct = async (req, res, next) => {
       renombrarImagen(existingProduct[0].image);
     }
 
-    // Actualizar el producto en la base de datos con la nueva información
-    const updatedRows = await db.update(Products)
+    // Actualizar el producto en la base de datos
+    const updatedRows = await db
+      .update(Products)
       .set({
         quantity: req.body.quantity,
         name: req.body.name,
         image: imagePath,
       })
-      .where(eq(Products.id, id));
+      .where(eq(Products.id, id))
 
     res.json({
       data: updatedRows,
     });
 
   } catch (error) {
-    console.error('Error al editar producto:', error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    console.error('Error al editar producto:', error)
+    res.status(500).json({ error: 'Error interno del servidor' })
   }
 };
 
