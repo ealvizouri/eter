@@ -3,7 +3,7 @@ import Button from '../components/Button'
 import ReactModal from 'react-modal'
 import { twMerge } from 'tailwind-merge'
 
-interface DeleteConfirmationAlertProps {
+interface ConfirmationAlertProps {
   isOpen: boolean
   close: () => void
   onCancel: () => void
@@ -11,9 +11,11 @@ interface DeleteConfirmationAlertProps {
   className?: string
   overlayClassName?: string
   children: ReactNode
+  cancelText?: string
+  confirmText?: string
 }
 
-const DeleteConfirmationAlert = ({
+const ConfirmationAlert = ({
   isOpen,
   close,
   onCancel,
@@ -21,7 +23,9 @@ const DeleteConfirmationAlert = ({
   className,
   overlayClassName,
   children,
-}: DeleteConfirmationAlertProps) => {
+  cancelText = 'Cancelar',
+  confirmText = 'Confirmar',
+}: ConfirmationAlertProps) => {
   return (
     <ReactModal
       isOpen={isOpen}
@@ -45,7 +49,7 @@ const DeleteConfirmationAlert = ({
           width="100%"
           className="text-white bg-red-500 hover:bg-red-600 rounded-md"
         >
-          Cancelar
+          {cancelText}
         </Button>
         <Button
           border="2px solid #E41A02"
@@ -56,11 +60,11 @@ const DeleteConfirmationAlert = ({
           width="100%"
           className="text-white bg-green-500 hover:bg-green-600 rounded-md"
         >
-          Confirmar
+          {confirmText}
         </Button>
       </div>
     </ReactModal>
   )
 }
 
-export default DeleteConfirmationAlert
+export default ConfirmationAlert

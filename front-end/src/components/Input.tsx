@@ -1,15 +1,15 @@
-import { Control, FieldValues, Controller } from 'react-hook-form';
-import { twMerge } from 'tailwind-merge';
-import React from 'react';
+import { Control, FieldValues, Controller } from 'react-hook-form'
+import { twMerge } from 'tailwind-merge'
+import React from 'react'
 
 interface Props {
-  name: string;
-  label: string;
-  type?: HTMLInputElement['type'];
-  className?: string;
-  control: any;
-  rules?: any;
-  children?: React.ReactNode; // Nueva propiedad children
+  name: string
+  label: string
+  type?: HTMLInputElement['type']
+  className?: string
+  control: any
+  rules?: any
+  children?: React.ReactNode // Nueva propiedad children
 }
 
 const Input = ({
@@ -28,7 +28,7 @@ const Input = ({
       rules={rules}
       render={({ field, fieldState: { error } }) => {
         return (
-          <div className="flex flex-col mb-4 relative"> 
+          <div className="flex flex-col mb-4 relative">
             <label>{label}</label>
             <input
               {...field}
@@ -37,7 +37,7 @@ const Input = ({
               className={twMerge(
                 'border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300', // custom styling
                 error?.message ? 'border border-red-500' : 'border-gray-300',
-                className
+                className,
               )}
             />
             {children && (
@@ -49,10 +49,10 @@ const Input = ({
               <label className="text-red-500">{error.message}</label>
             )}
           </div>
-        );
+        )
       }}
     />
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

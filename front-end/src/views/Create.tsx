@@ -1,12 +1,13 @@
-import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Formulario from '../components/Form'
+import Formulario, { ProductFormData } from '../components/Form'
 import { useAuth } from '../AuthProvider'
 import axiosInstance from '../axiosInstance'
+import { FormProvider, useForm } from 'react-hook-form'
 
 const Create = () => {
   const { token, setToken } = useAuth()
   const navigate = useNavigate()
+  const methods = useForm<ProductFormData>()
 
   const onSubmit = async (data: any) => {
     try {
@@ -51,7 +52,9 @@ const Create = () => {
 
       <div className="mt-4">
         <h2 className="text-2xl font-bold mb-4 text-center">Crear Producto</h2>
-        <Formulario onSubmit={onSubmit} />
+        <FormProvider {...methods}>
+          <Formulario onSubmit={onSubmit} />
+        </FormProvider>
       </div>
     </div>
   )

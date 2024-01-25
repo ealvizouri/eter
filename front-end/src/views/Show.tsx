@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //import Modal from 'react-modal' para colocar modal
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from '../axios'
 import Link from '../components/Links'
 import { useAuth } from '../AuthProvider'
